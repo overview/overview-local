@@ -1,5 +1,12 @@
 
 
+overview-blob-storage:
+  image: ubuntu:vivid
+  container_name: overview-blob-storage
+  volumes:
+    - /var/lib/overview/blob-storage
+  command: /bin/true
+
 documentset-worker:
   image: overview/documentset-worker
   container_name: documentset-worker
@@ -7,8 +14,8 @@ documentset-worker:
     - overview-database
     - overview-messagebroker
     - overview-searchindex
-  volumes:
-    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+  volumes_from:
+    - overview-blob-storage
 
 
 worker:
@@ -17,8 +24,8 @@ worker:
   external_links:
     - overview-database
     - overview-searchindex
-  volumes:
-    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+  volumes_from:
+    - overview-blob-storage
 
 
 web:
@@ -29,8 +36,8 @@ web:
     - overview-messagebroker
     - overview-redis
     - overview-searchindex
-  volumes:
-    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+  volumes_from:
+    - overview-blob-storage 
   ports:
     - "9000:9000"
 

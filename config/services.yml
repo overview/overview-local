@@ -1,10 +1,23 @@
 
+overview-database-data:
+  image: postgres:9.4
+  container_name: overview-database-data
+  volumes:
+    - /var/lib/postgresql/data
+  command: /bin/true
+
+overview-searchindex-data:
+  image: elasticsearch:1.7
+  container_name: overview-searchindex-data
+  volumes:
+    - /usr/share/elasticsearch/data
+  command: /bin/true
 
 overview-database:
   image: overview/database
   container_name: overview-database
-  volumes:
-    - /opt/overview-data/postgres:/var/lib/postgresql/data
+  volumes_from:
+    - overview-database-data
 
 messagebroker:
   image: overview/message-broker
@@ -17,8 +30,8 @@ redis:
 overview-searchindex:
   image: elasticsearch:1.7
   container_name: overview-searchindex
-  volumes:
-    - /opt/overview-data/elasticsearch:/usr/share/elasticsearch/data 
+  volumes_from:
+    - overview-searchindex-data
   command: elasticsearch \
       -Des.cluster.name="DevSearchIndex" \
       -Des.node.name="SearchIndex" \
