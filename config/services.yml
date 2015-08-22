@@ -1,0 +1,25 @@
+
+
+overview-database:
+  image: overview/database
+  container_name: overview-database
+  volumes:
+    - /opt/overview-data/postgres:/var/lib/postgresql/data
+
+messagebroker:
+  image: overview/message-broker
+  container_name: overview-messagebroker
+
+redis:
+  image: redis:2.8
+  container_name: overview-redis 
+
+overview-searchindex:
+  image: elasticsearch:1.7
+  container_name: overview-searchindex
+  volumes:
+    - /opt/overview-data/elasticsearch:/usr/share/elasticsearch/data 
+  command: elasticsearch \
+      -Des.cluster.name="DevSearchIndex" \
+      -Des.node.name="SearchIndex" \
+      -Des.index.number_of_shards=1 

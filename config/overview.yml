@@ -1,0 +1,36 @@
+
+
+documentset-worker:
+  image: overview/documentset-worker
+  container_name: documentset-worker
+  external_links:
+    - overview-database
+    - overview-messagebroker
+    - overview-searchindex
+  volumes:
+    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+
+
+worker:
+  image: overview/worker
+  container_name: worker
+  external_links:
+    - overview-database
+    - overview-searchindex
+  volumes:
+    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+
+
+web:
+  image: overview/web
+  container_name: web
+  external_links:
+    - overview-database
+    - overview-messagebroker
+    - overview-redis
+    - overview-searchindex
+  volumes:
+    - /opt/overview-data/blob-storage:/var/lib/overview/blob-storage 
+  ports:
+    - "9000:9000"
+
