@@ -16,6 +16,7 @@ documentset-worker:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage
+  restart: on-failure
 
 
 worker:
@@ -26,6 +27,7 @@ worker:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage
+  restart: on-failure
 
 
 web:
@@ -38,6 +40,7 @@ web:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage 
+  restart: on-failure
   ports:
     - "9000:9000"
 
