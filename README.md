@@ -65,7 +65,7 @@ During the initial setup, or subsequent update, the process may become stuck, wi
 
 This problem appears to be a [known issue](https://github.com/docker/docker/issues/12823) with Docker. To get past the problem:
 
-  - Ctrl-C in the Quick Start Terminal to interrupt the 
+  - Ctrl-C in the Quick Start Terminal to interrupt the download.
   - Stop the host: `docker-machine stop default`
   - Quit the _Docker Quick Start Terminal_ and restart it
   - Delete the stuck download: `docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)`
@@ -85,9 +85,9 @@ We use [Docker Compose](https://docs.docker.com/compose/) to specify how the dif
 
 A container is created and run for each separate Overview component. In addition, data containers are used for persistent storage:
 
-  - overview-database-data
-  - overview-searchindex-data
-  - overview-blob-storage
+  - `overview-database-data`
+  - `overview-searchindex-data`
+  - `overview-blob-storage`
 
 Deleting these containers will result in all data to be deleted from your Overview installation.
 
