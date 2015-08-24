@@ -35,7 +35,7 @@ The result should be a directory called overview-local
 1. `cd overview-local`
 1. `./run-overview.sh`
 This will start to download all the Overview components. The download may take a while, depending on your connection speed. Once the download is complete, Overview should be running, available at `http://192.168.99.100:9000` (or whatever IP address you noted above).
-
+If you don't remember the address, running `docker-machine ip default` from the Quick Start terminal will tell you.
 
 ## Subsequent startups
 
@@ -48,10 +48,44 @@ Overview will keep running until you restart the computer. To restart,
 Overview should start without trying to download anything
 
 
-## Problems
+## Updating Overview
 
-If you restart the computer, all previously uploaded data may be gone when you start up Overview again. That's a problem.
+Once new features have been deployed to http://overviewdocs.com, you can update your own local installations. From the `Docker Quick Start Terminal`, run
 
-## Needed
-- update-overview.sh
-- stop-overview.sh
+      ./update-overview.sh
+
+## Issues
+
+During the initial setup, or subsequent update, the process may become stuck, with a message saying something like:
+
+        Layer already being pulled by another client. Waiting.
+
+This problem appears to be a [known issue](https://github.com/docker/docker/issues/12823) with Docker. To get past the problem:
+
+  - Ctrl-C in the Quick Start Terminal to interrupt the 
+  - Stop the host: `docker-machine stop default`
+  - Quit the _Docker Quick Start Terminal_ and restart it
+  - Delete the stuck download: `docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)`
+  - Resume downloading: `./run-overview.sh`
+
+        
+
+
+
+## Technical details
+
+We use [Docker Compose](https://docs.docker.com/compose/) to specify how the different Overview components are started. The `config` directory contains the definition files:
+  - `services.yml` is used to start up the third-party services used by Overview: a postgres database, a redis server, and a Apollo ActiveMQ message broker.
+  - `db-setup.yml` is used to run the database evolution.
+  - `overview.yml` is used to start the main Overview components: the web front end, the document set worker, and worker processes.
+
+
+A container is created and run for each separate Overview component. In addition, data containers are used for persistent storage:
+
+  - overview-database-data
+  - overview-searchindex-data
+  - overview-blob-storage
+
+Deleting these containers will result in all data to be deleted from your Overview installation.
+
+
