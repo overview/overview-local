@@ -32,8 +32,10 @@ The terminal should say something like, `docker is configured to use the default
         git clone https://github.com/overview/overview-local.git
 
 The result should be a directory called overview-local
+
 1. `cd overview-local`
 1. `./run-overview.sh`
+
 This will start to download all the Overview components. The download may take a while, depending on your connection speed. Once the download is complete, Overview should be running, available at `http://192.168.99.100:9000` (or whatever IP address you noted above).
 If you don't remember the address, running `docker-machine ip default` from the Quick Start terminal will tell you.
 
@@ -41,9 +43,10 @@ If you don't remember the address, running `docker-machine ip default` from the 
 
 
 Overview will keep running until you restart the computer. To restart, 
+
 1. Start the `Docker Quick Start Terminal` application
-2. cd to the `overview-local` directory
-3. `./run-overview.sh`
+1. cd to the `overview-local` directory
+1. `./run-overview.sh`
 
 Overview should start without trying to download anything
 
