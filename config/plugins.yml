@@ -1,0 +1,43 @@
+
+
+overview-word-cloud:
+  image: overview/overview-word-cloud
+  container_name: overview-word-cloud
+  restart: on-failure
+  ports:
+    - "3000:3000"
+
+overview-entity-filter:
+  image: overview/overview-entity-filter
+  container_name: overview-entity-filter
+  restart: on-failure
+  ports:
+    - "3001:3000"
+
+overview-grep:
+  image: overview/overview-grep
+  container_name: overview-grep
+  restart: on-failure
+  ports:
+    - "3002:3000"
+
+overview-file-browser:
+  image: overview/overview-file-browser
+  container_name: overview-file-browser
+  restart: on-failure
+  ports:
+    - "3003:3000"
+
+
+plugin-setup:
+  image: overview/plugin-setup
+  container_name: plugin-setup
+  env_file: 
+    - host.env
+
+
+
+  external_links:
+    - overview-database
+  
+
