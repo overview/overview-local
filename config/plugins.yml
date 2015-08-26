@@ -28,15 +28,19 @@ overview-file-browser:
   ports:
     - "3003:3000"
 
+overview-multi-search:
+  image: overview/overview-multi-search
+  container_name: overview-multi-search
+  restart: on-failure
+  ports: 
+    - "3004:3000"
+
 
 plugin-setup:
   image: overview/plugin-setup
   container_name: plugin-setup
   env_file: 
     - host.env
-
-
-
   external_links:
     - overview-database
   
