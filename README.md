@@ -61,8 +61,8 @@ The names of the Overview components will be displayed.
 
 _Installation on other Linux distros should also be possible. See <https://docs.docker.com/installation/>._
 
-1. Install docker, as described at https://docs.docker.com/installation/ubuntulinux/.
-1. Install docker-compose, as described at https://docs.docker.com/compose/install/. Simplest is:  `sudo pip install docker-compose`
+1. Install docker, as described at <https://docs.docker.com/installation/ubuntulinux/>.
+1. Install docker-compose, as described at <https://docs.docker.com/compose/install/>. Simplest is:  `sudo pip install docker-compose`
 1. If `git` is not installed, install it.
 1. Navigate to the directory where you want the Overview configuration files to be installed. Run:
 
@@ -166,7 +166,7 @@ If this message is shown and there appears to be no progress after several minut
 
          Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-(you can then hit `Ctrl-c` to stop viewing the log and return to the terminal prompt.
+(you can then hit `Ctrl-c` to stop viewing the log and return to the terminal prompt.)
 
 
 ### Error during startup
@@ -188,6 +188,7 @@ Restart Docker:
 ## Technical details
 
 For Ubuntu and OS X, we use [Docker Compose](https://docs.docker.com/compose/) to specify how the different Overview components are started. The `config` directory contains the definition files:
+
   - `services.yml` is used to start up the third-party services used by Overview: a postgres database, a redis server, and a Apollo ActiveMQ message broker.
   - `db-setup.yml` is used to run the database evolution.
   - `overview.yml` is used to start the main Overview components: the web front end, the document set worker, and worker processes.
