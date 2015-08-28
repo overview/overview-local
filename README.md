@@ -142,6 +142,9 @@ Once new features have been deployed to http://overviewdocs.com, you can update 
 
 ## Issues
 
+
+### Stuck during setup
+
 During the initial setup or subsequent updates, the process may become stuck, with a message saying something like:
 
         Layer already being pulled by another client. Waiting.
@@ -149,13 +152,36 @@ During the initial setup or subsequent updates, the process may become stuck, wi
 If this message is shown and there appears to be no progress after several minutes, the download may not be able to proceed without restarting. This problem appears to be a [known issue](https://github.com/docker/docker/issues/12823) with Docker. To get past the problem:
 
   - Ctrl-C to interrupt the download.
-  - Restart docker
-    * OS X and Windows: `docker-machine stop default`
+  - Restart Docker
+    * OS X and Windows: `docker-machine restart default`
     * Ubuntu: `sudo restart docker`
   - Delete the stuck download: `docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)`
   - Restart the command that was stuck (eg. `./run-overview.sh`, `./init-overview.sh`, `./update-overview.sh`)
 
         
+### No response from web server
+
+- Make sure you're using the correct IP address, as returned by `docker-machine ip default`
+- The web server may not have started yet. Run `docker logs -f web`. Try connecting once the server reports
+
+         Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+(you can then hit `Ctrl-c` to stop viewing the log and return to the terminal prompt.
+
+
+### Error during startup
+
+During start up, the below message may be displayed:
+
+         Error response from daemon: Cannot start container worker. System error: read parent: connection reset by peer
+
+Restart Docker:
+
+  - Remove all started processes: `docker rm -f $(docker ps -q)`
+  - Restart Docker  
+    * OS X and Windows: `docker-machine restart default`
+    * Ubuntu: `sudo restart docker`
+  - Restart overview (`./run-overview.sh` on Ubuntu and OS X,  or `./start-overview.sh` on Windows)
 
 
 
