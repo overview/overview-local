@@ -1,10 +1,11 @@
 #!/bin/bash
 
-cd "$(dirname "$0")"
 
 IMAGE_NAMES=(
   database
   message-broker
+  db-evolution-applier
+  plugin-setup
   overview-word-cloud
   overview-entity-filter
   overview-grep
@@ -17,16 +18,18 @@ IMAGE_NAMES=(
 
 # names not preprended with overview
 CONTAINER_NAMES=(
+  web
+  documentset-worker
+  worker
   overview-database
   overview-messagebroker
+  overview-redis
+  overview-searchindex
   overview-word-cloud
   overview-entity-filter
   overview-grep
   overview-file-browser
   overview-multi-search
-  documentset-worker
-  worker
-  web
 )
 
 for image in ${IMAGE_NAMES[@]}; do

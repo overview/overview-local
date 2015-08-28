@@ -115,7 +115,7 @@ Overview will keep running until you restart the computer. Restarting does not r
 
 ## Updating Overview
 
-Once new features have been deployed to http://overviewdocs.com, you can update your own local installation.
+Once new features have been deployed to http://overviewdocs.com, you can update your own local installation. Overview will be updated while preserving your data.
 
 ### For OS X
 
@@ -130,6 +130,7 @@ Once new features have been deployed to http://overviewdocs.com, you can update 
 1. Start the `Docker Quick Start Terminal` application
 1. `cd overview-local/windows`
 1. `./update-overview.sh`
+1. `./init-overview.sh`
 1. `./start-overview.sh`
 
 ### For Ubuntu

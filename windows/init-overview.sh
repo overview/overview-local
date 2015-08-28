@@ -5,9 +5,27 @@
 ## These should only be created once. If they're deleted, all persistent storage
 ## used by Overview will be deleted.
 ## (calling twice is ok, will result in error message only)
-docker create --name overview-database-data -v /var/lib/postgresql/data postgres:9.4
-docker create --name overview-searchindex-data -v /usr/share/elasticsearch/data elasticsearch:1.7
-docker create --name overview-blob-storage -v /var/lib/overview/blob-storage ubuntu:vivid
+ 
+
+
+
+DATABASE=$(docker ps -a -q --filter name=overview-database-data)
+SEARCHINDEX=$(docker ps -a -q --filter name=overview-searchindex-data)
+BLOBSTORAGE=$(docker ps -a -q --filter name=overview-blob-storage)
+
+
+if [ -z "${DATABASE}" ]; then
+  docker create --name overview-database-data -v /var/lib/postgresql/data postgres:9.4
+fi
+
+if [ -z "{SEARCHINDEX}" ]; then
+  docker create --name overview-searchindex-data -v /usr/share/elasticsearch/data elasticsearch:1.7
+fi
+
+if [ -z "${BLOBSTORAGE}" ]; then
+  docker create --name overview-blob-storage -v /var/lib/overview/blob-storage ubuntu:vivid
+fi
+
 
 
 ## Create basic services used by Overview
@@ -71,4 +89,8 @@ docker create --name overview-multi-search \
 
 
 
+# Get images for one time commands
+
+docker pull overview/db-evolution-applier
+docker pull overview/plugin-setup
 
