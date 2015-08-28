@@ -2,7 +2,7 @@
 
 
 ## Start services
-docker start overview-database \
+docker start overview-database
 docker start overview-messagebroker
 docker start overview-redis
 docker start overview-searchindex
@@ -29,7 +29,7 @@ docker start overview-word-cloud
 docker start overview-entity-filter
 docker start overview-grep
 docker start overview-file-browser
-docker start overview-multi-sear
+docker start overview-multi-search
 
 
 ## Start Overview
