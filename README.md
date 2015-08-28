@@ -7,69 +7,152 @@ While the [public Overview server](https://overviewdocs.com) is recommended for 
 A fair amount of setup is still necessary however, and you should be comfortable working on the command line, on whatever platform you're using.
 
 
-## Initial Setup
+## Setup
 
-1. Install Docker for your platform. Follow the _Get Started with Docker_ link on http://docker.com.
-1. Install git from https://git-scm.com/downloads.
+### For OS X
 
-
-### Configuring Docker on OS X and Windows
-
-1. Start the _Docker Quick Start Terminal_ application. Behind the scenes, a new virtual machine will be created, that will act as the docker host. This machine is the common platform on which Overview will run. Unfortunately, it is configured with a small amount of RAM. To increase the memory, first quit the Docker terminal.
-1. Start the _Virtual Box_ application. Find the Machine named _default_. It should be listed as _Running_. Right-click on the machine, and select _Shutdown_.
-1. Making sure _default_ is selected, click on _Settings_.
-1. Select the _System_ tab.
-1. Increase the amount of _Base Memory_. Assuming that your computer has at least 8gb of RAM, allocate 4096Mb to the _default_ virtual machine.
-1. Click _OK_ to save the change.
-1. Start the _Docker Quick Start Terminal_ again.
-The terminal should say something like, `docker is configured to use the default machine with IP 192.168.99.100`. This IP address will be the address you use to connect to Overview.
-
-### Download configuration
-
-1. In the Docker terminal, navigate to the directory where you want the Overview configuration files to be installed.
+1. Install the Docker tools, as described at <https://docs.docker.com/installation/mac/> .
+1. Install `git` if not installed already, for example from <https://git-scm.com/downloads> .
+1. Follow the directions in the _Configuring Docker on OS X and Windows_ section. 
+1. In the _Docker Quick Start Terminal_ (referred to  as 'the terminal' from now on), navigate to the directory where you want the Overview configuration files to be installed.
 1. Run:
 
         git clone https://github.com/overview/overview-local.git
 
-The result should be a directory called overview-local
+The result should be a directory called _overview-local_.
 
 1. `cd overview-local`
 1. `./run-overview.sh`
 
-This will start to download all the Overview components. The download may take a while, depending on your connection speed. Once the download is complete, Overview should be running, available at `http://192.168.99.100:9000` (or whatever IP address you noted above).
-If you don't remember the address, running `docker-machine ip default` from the Quick Start terminal will tell you.
+This will start to download all the Overview components. The download may take a while, depending on your connection speed. After setup is complete, the names of the Overview components are displayed, and the command prompt will be available again.
+
+1. Run `docker-machine ip default` to find Overview's IP address (probably _192.168.99.100_).
+1. Open <http://192.168.99.100:9000> (or the IP address returned in the above step) in your browser.
+
+
+
+### For Windows
+
+_Note: Windows 10 is not supported yet_
+
+1. Install the Docker tools, as described at <https://docs.docker.com/installation/windows/>. This will install `git`. If you already have git installed on your system, there may be conflicts. Either uninstall your previous version before installing Docker, or tell the Docker installer to not install the `MSYS-git UNIX tools`.
+1. Follow the directions in the _Configuring Docker on OS X and Windows_ section.
+1. In the _Docker Quick Start Terminal_ (referred to  as 'the terminal' from now on), navigate to the directory where you want the Overview configuration files to be installed.
+1. Run:
+
+        git clone https://github.com/overview/overview-local.git
+
+The result should be a directory called _overview-local_.
+
+1. `cd overview-local/windows`
+1. `./init-overview.sh`
+
+This will start to download all the Overview components. The download may take a while, depending on your connection speed. The terminal display will be confusing, as updates are written to the top of the screen. When download is complete, the command prompt will be available again (hitting _Return_ a number of times will clear the screen). 
+
+1. `./start-overview.sh`
+
+The names of the Overview components will be displayed.
+
+1. Run `docker-machine ip default` to find Overview's IP address (probably _192.168.99.100_).
+1. Open <http://192.168.99.100:9000> (or the IP address returned in the above step) in your browser.
+
+
+### For Ubuntu
+
+_Installation on other Linux distros should also be possible. See <https://docs.docker.com/installation/>._
+
+1. Install docker, as described at https://docs.docker.com/installation/ubuntulinux/.
+1. Install docker-compose, as described at https://docs.docker.com/compose/install/. Simplest is:  `sudo pip install docker-compose`
+1. If `git` is not installed, install it.
+1. Navigate to the directory where you want the Overview configuration files to be installed. Run:
+
+        git clone https://github.com/overview/overview-local.git
+
+The result should be a directory called _overview-local_.
+
+1. `cd overview-local`
+1. `./run-overview.sh`
+
+This will start to download all the Overview components. The download may take a while, depending on your connection speed.  After setup is complete, the names of the Overview components are displayed, and the command prompt will be available again.
+
+1. Open <http://localhost:9000> in your browser.
+
+### Configuring Docker on OS X and Windows
+
+1. Start the _Docker Quick Start Terminal_ application. Behind the scenes, a new virtual machine will be created, that will act as the docker host. This machine is the common platform on which Overview will run. Unfortunately, it is configured with a small amount of RAM. 
+1. Stop the virtual machine: `docker-machine stop default`
+1. Set virtual machine memory to 4Gb (assuming your system has 8Gb).
+  - OS X: `VBoxManage modifyvm default --memory 4096`
+  - Windows: `/c/Program\ Files/Oracle/VirtualBox/VBoxManage modifyvm default --memory 4096`
+1. Restart the virtual machine: `docker-machine start default`
+
+Docker uses Virtual Box to setup and run the docker host. The Virtual Box application can be used to change memory, disk, and networking settings if the defaults are not sufficient.
 
 ## Subsequent startups
 
+Overview will keep running until you restart the computer. Restarting does not require the downloads needed in the setup step and will be much quicker.
 
-Overview will keep running until you restart the computer. To restart, 
+### For OS X
 
 1. Start the `Docker Quick Start Terminal` application
-1. cd to the `overview-local` directory
+1. `cd overview-local` 
 1. `./run-overview.sh`
 
-Overview should start without trying to download anything
+
+### For Windows
+
+1. Start the `Docker Quick Start Terminal` application
+1. `cd overview-local/windows` 
+1. `./start-overview.sh`
+
+
+### For Ubuntu
+
+1. `cd overview-local` 
+1. `./run-overview.sh`
+
 
 
 ## Updating Overview
 
-Once new features have been deployed to http://overviewdocs.com, you can update your own local installations. From the `Docker Quick Start Terminal`, run
+Once new features have been deployed to http://overviewdocs.com, you can update your own local installation.
 
-      ./update-overview.sh
+### For OS X
+
+1. Start the `Docker Quick Start Terminal` application
+1. `cd overview-local`
+1. `./update-overview.sh`
+1. `./run-overview.sh`
+
+
+### For Windows
+
+1. Start the `Docker Quick Start Terminal` application
+1. `cd overview-local/windows`
+1. `./update-overview.sh`
+1. `./start-overview.sh`
+
+### For Ubuntu
+
+1. `cd overview-local`
+1. `./update-overview.sh`
+1. `./run-overview.sh`
+
 
 ## Issues
 
-During the initial setup, or subsequent update, the process may become stuck, with a message saying something like:
+During the initial setup or subsequent updates, the process may become stuck, with a message saying something like:
 
         Layer already being pulled by another client. Waiting.
 
-This problem appears to be a [known issue](https://github.com/docker/docker/issues/12823) with Docker. To get past the problem:
+If this message is shown and there appears to be no progress after several minutes, the download may not be able to proceed without restarting. This problem appears to be a [known issue](https://github.com/docker/docker/issues/12823) with Docker. To get past the problem:
 
-  - Ctrl-C in the Quick Start Terminal to interrupt the download.
-  - Stop the host: `docker-machine stop default`
-  - Quit the _Docker Quick Start Terminal_ and restart it
+  - Ctrl-C to interrupt the download.
+  - Restart docker
+    * OS X and Windows: `docker-machine stop default`
+    * Ubuntu: `sudo restart docker`
   - Delete the stuck download: `docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)`
-  - Resume downloading: `./run-overview.sh`
+  - Restart the command that was stuck (eg. `./run-overview.sh`, `./init-overview.sh`, `./update-overview.sh`)
 
         
 
@@ -77,11 +160,14 @@ This problem appears to be a [known issue](https://github.com/docker/docker/issu
 
 ## Technical details
 
-We use [Docker Compose](https://docs.docker.com/compose/) to specify how the different Overview components are started. The `config` directory contains the definition files:
+For Ubuntu and OS X, we use [Docker Compose](https://docs.docker.com/compose/) to specify how the different Overview components are started. The `config` directory contains the definition files:
   - `services.yml` is used to start up the third-party services used by Overview: a postgres database, a redis server, and a Apollo ActiveMQ message broker.
   - `db-setup.yml` is used to run the database evolution.
   - `overview.yml` is used to start the main Overview components: the web front end, the document set worker, and worker processes.
+  - `plugins.yml` is used to start the plugins and configure Overview to know about them.
 
+
+Docker Compose is not (yet) supported for Windows, so the scripts in the _windows_ directory mimic the functionality.
 
 A container is created and run for each separate Overview component. In addition, data containers are used for persistent storage:
 
