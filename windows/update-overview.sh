@@ -37,6 +37,11 @@ for image in ${IMAGE_NAMES[@]}; do
 done
 
 for container in ${CONTAINER_NAMES[@]}; do
+  echo -n "Deleting "
   docker rm -f $container
 done
+
+echo Restarting virtual host
+docker-machine restart default
+
 
