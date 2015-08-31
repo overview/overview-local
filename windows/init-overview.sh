@@ -15,15 +15,24 @@ BLOBSTORAGE=$(docker ps -a -q --filter name=overview-blob-storage)
 
 
 if [ -z "${DATABASE}" ]; then
+  echo Creating database data container
   docker create --name overview-database-data -v /var/lib/postgresql/data postgres:9.4
+else
+  echo Found database data container $DATABASE
 fi
 
-if [ -z "{SEARCHINDEX}" ]; then
+if [ -z "${SEARCHINDEX}" ]; then
+  echo Creating searchindex data container
   docker create --name overview-searchindex-data -v /usr/share/elasticsearch/data elasticsearch:1.7
+else
+  echo Found searchindex data container $SEARCHINDEX
 fi
 
 if [ -z "${BLOBSTORAGE}" ]; then
+  echo Creating blob storage data container
   docker create --name overview-blob-storage -v /var/lib/overview/blob-storage ubuntu:vivid
+else
+  echo Found blob storage data container $BLOBSTORAGE
 fi
 
 
