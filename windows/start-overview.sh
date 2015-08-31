@@ -10,7 +10,13 @@ docker start \
 
 ## Wait a few seconds to make sure database comes up
 ## then apply evolutions
-sleep 5
+
+## Wait for database to start
+docker run --name up-checker-database \
+  --env DOCKER_HOST=$DOCKER_HOST \
+  --rm \
+  overview/up-checker database
+
 docker run --name db-evolution-applier \
   --link overview-database \
   --rm \
@@ -42,7 +48,7 @@ docker start \
 docker run --name up-checker-web \
   --env DOCKER_HOST=$DOCKER_HOST \
   --rm \
-  overview/up-checker
+  overview/up-checker frontend
 
 start http://$(docker-machine ip default):9000
 
