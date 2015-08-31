@@ -105,4 +105,4 @@ docker create --name overview-multi-search \
 
 docker pull overview/db-evolution-applier
 docker pull overview/plugin-setup
-
+docker pull overview/up-checker
