@@ -177,10 +177,11 @@ During start up, the below message may be displayed:
 
 Restart Docker:
 
-  - Remove all started processes: `docker rm -f $(docker ps -q)`
+  - Remove all started containers: `docker rm -f $(docker ps -q)`
   - Restart Docker  
     * OS X and Windows: `docker-machine restart default`
     * Ubuntu: `sudo restart docker`
+  - On Windows, recreate containers `./init-overview.sh`.
   - Restart overview (`./run-overview.sh` on Ubuntu and OS X,  or `./start-overview.sh` on Windows)
 
 
