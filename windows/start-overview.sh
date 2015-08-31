@@ -38,4 +38,11 @@ docker start \
   worker \
   web
 
+## Wait for Overview to start
+docker run --name up-checker-web \
+  --env DOCKER_HOST=$DOCKER_HOST \
+  --rm \
+  overview/up-checker
+
+start http://$(docker-machine ip default):9000
 
