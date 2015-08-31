@@ -7,7 +7,8 @@ echo DOCKER_HOST=$DOCKER_HOST > config/host.env
 
 docker-compose -f config/services.yml up -d
 
-sleep 5
+
+docker run --name up-checker-database --link overview-database --rm overview/up-checker database
 
 docker-compose -f config/db-setup.yml up
 docker-compose -f config/overview.yml up -d
@@ -17,7 +18,7 @@ docker-compose -f config/plugins.yml up -d
 
 ## Try to wait for server to start and then open 
 ## a browser window to the Overview url
-docker run --name up-checker-web --env-file config/host.env --rm overview/up-checker
+docker run --name up-checker-web --env-file config/host.env --rm overview/up-checker frontend
 
 
 PLUGIN_HOST=$(echo ${DOCKER_HOST:-localhost} | sed 's/[a-zA-Z]*:\/\/\(.*\):.*/\1/')
