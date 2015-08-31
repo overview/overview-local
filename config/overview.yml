@@ -16,6 +16,8 @@ documentset-worker:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage
+  env_file:
+    - overview.env
   restart: on-failure
 
 
@@ -27,6 +29,8 @@ worker:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage
+  env_file:
+    - overview.env
   restart: on-failure
 
 
@@ -40,6 +44,8 @@ web:
     - overview-searchindex
   volumes_from:
     - overview-blob-storage 
+  env_file:
+    - overview.env
   restart: on-failure
   ports:
     - "9000:9000"

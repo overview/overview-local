@@ -56,12 +56,14 @@ docker create --name documentset-worker \
   --link overview-messagebroker \
   --link overview-searchindex \
   --volumes-from overview-blob-storage \
+  --env-file ../config/overview.env \
   overview/documentset-worker
 
 docker create --name worker \
   --link overview-database \
   --link overview-searchindex \
   --volumes-from overview-blob-storage \
+  --env-file ../config/overview.env \
   overview/worker
 
 docker create --name web \
@@ -70,6 +72,7 @@ docker create --name web \
   --link overview-searchindex \
   --link overview-redis \
   --volumes-from overview-blob-storage \
+  --env-file ../config/overview.env \
   -p 9000:9000 \
   overview/web
 
