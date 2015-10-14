@@ -16,5 +16,4 @@ docker stop \
 docker stop \
   overview-searchindex \
   overview-redis \
-  overview-messagebroker \
   overview-database \

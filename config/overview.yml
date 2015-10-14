@@ -1,5 +1,3 @@
-
-
 overview-blob-storage:
   image: ubuntu:vivid
   container_name: overview-blob-storage
@@ -12,7 +10,6 @@ documentset-worker:
   container_name: documentset-worker
   external_links:
     - overview-database
-    - overview-messagebroker
     - overview-searchindex
   volumes_from:
     - overview-blob-storage
@@ -39,9 +36,9 @@ web:
   container_name: web
   external_links:
     - overview-database
-    - overview-messagebroker
     - overview-redis
     - overview-searchindex
+    - overview-documentset-worker
   volumes_from:
     - overview-blob-storage 
   env_file:

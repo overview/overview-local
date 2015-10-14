@@ -4,7 +4,6 @@
 ## Start services
 docker start \
   overview-database \
-  overview-messagebroker \
   overview-redis \
   overview-searchindex
 

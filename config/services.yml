@@ -20,11 +20,6 @@ overview-database:
   volumes_from:
     - overview-database-data
 
-messagebroker:
-  image: overview/message-broker
-  container_name: overview-messagebroker
-  restart: on-failure
-
 redis:
   image: redis:2.8
   container_name: overview-redis 

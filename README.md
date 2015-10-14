@@ -190,11 +190,10 @@ Restart Docker:
 
 For Ubuntu and OS X, we use [Docker Compose](https://docs.docker.com/compose/) to specify how the different Overview components are started. The `config` directory contains the definition files:
 
-  - `services.yml` is used to start up the third-party services used by Overview: a postgres database, a redis server, and a Apollo ActiveMQ message broker.
+  - `services.yml` is used to start up the third-party services used by Overview: a postgres database and a redis server.
   - `db-setup.yml` is used to run the database evolution.
-  - `overview.yml` is used to start the main Overview components: the web front end, the document set worker, and worker processes.
+  - `overview.yml` is used to start the main Overview components: the web front end, the document set worker, and worker process.
   - `plugins.yml` is used to start the plugins and configure Overview to know about them.
-
 
 Docker Compose is not (yet) supported for Windows, so the scripts in the _windows_ directory mimic the functionality.
 
@@ -205,5 +204,3 @@ A container is created and run for each separate Overview component. In addition
   - `overview-blob-storage`
 
 Deleting these containers will result in all data to be deleted from your Overview installation.
-
-

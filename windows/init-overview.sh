@@ -39,7 +39,6 @@ fi
 
 ## Create basic services used by Overview
 docker create --name overview-database --volumes-from overview-database-data overview/database
-docker create --name overview-messagebroker  overview/message-broker
 docker create --name overview-redis redis:2.8
 docker create --name overview-searchindex \
   --volumes-from overview-searchindex-data \
@@ -48,12 +47,9 @@ docker create --name overview-searchindex \
   -Des.node.name="SearchIndex" \
   -Des.index.number_of_shards=1 
 
-
-
 ## Create Overview services
 docker create --name documentset-worker \
   --link overview-database \
-  --link overview-messagebroker \
   --link overview-searchindex \
   --volumes-from overview-blob-storage \
   --env-file ../config/overview.env \
@@ -68,9 +64,9 @@ docker create --name worker \
 
 docker create --name web \
   --link overview-database \
-  --link overview-messagebroker \
   --link overview-searchindex \
   --link overview-redis \
+  --link overview-documentset-worker \
   --volumes-from overview-blob-storage \
   --env-file ../config/overview.env \
   -p 9000:9000 \

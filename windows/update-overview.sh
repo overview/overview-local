@@ -3,7 +3,6 @@
 
 IMAGE_NAMES=(
   database
-  message-broker
   db-evolution-applier
   plugin-setup
   overview-word-cloud
@@ -22,7 +21,6 @@ CONTAINER_NAMES=(
   documentset-worker
   worker
   overview-database
-  overview-messagebroker
   overview-redis
   overview-searchindex
   overview-word-cloud
