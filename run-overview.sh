@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 docker-compose -f config/persistent.yml up
 

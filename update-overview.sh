@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 docker-compose -f config/services.yml pull
 docker-compose -f config/overview.yml pull

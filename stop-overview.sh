@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 docker-compose -f config/overview.yml stop
 docker-compose -f config/plugins.yml stop
