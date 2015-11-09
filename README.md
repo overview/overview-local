@@ -1,18 +1,27 @@
-
 Running Overview
 ================
 
-While the [public Overview server](https://overviewdocs.com) is recommended for most Overview users, there are some cases where running your own server is necessary. Overview consists of a number of different components and platforms, each requiring careful configuration and setup, making a local installation complicated. To simplify the process, we use [docker](http://docker.com) images, which allow us to package up all the pieces needed by Overview in a way that can be run on many different platforms.
+We recommend the [public Overview server](https://www.overviewdocs.com). But we
+also support users who want to run Overview on their own machines.
 
-A fair amount of setup is still necessary however, and you should be comfortable working on the command line, on whatever platform you're using.
+Here are some reasons to run Overview on your own machine(s):
 
+* You want total control over your documents. (We think Overview is secure from
+  most attacks; but we can't fight a subpoena.)
+* You want to experiment with large document sets. (Overview can handle one or
+  two gigabytes; above that, our servers may groan.)
+* You want to rebrand Overview. (Unless you're paying us, we won't go out of
+  our way to help you in this case.)
+* You don't have Internet access.
+
+If you need your own Overview instance, read on!
 
 ## Setup
 
 ### For OS X
 
-1. Install the Docker tools, as described at <https://docs.docker.com/installation/mac/> .
-1. Install `git` if not installed already, for example from <https://git-scm.com/downloads> .
+1. Install the Docker tools, as described at <https://docs.docker.com/installation/mac/>.
+1. Install `git` if not installed already, for example from <https://git-scm.com/downloads>.
 1. Follow the directions in the _Configuring Docker on OS X and Windows_ section. 
 1. In the _Docker Quick Start Terminal_ (referred to  as 'the terminal' from now on), navigate to the directory where you want the Overview configuration files to be installed.
 1. Run:
@@ -28,8 +37,6 @@ This will start to download all the Overview components. The download may take a
 
 1. Run `docker-machine ip default` to find Overview's IP address (probably _192.168.99.100_).
 1. Open <http://192.168.99.100:9000> (or the IP address returned in the above step) in your browser.
-
-
 
 ### For Windows
 
@@ -62,20 +69,15 @@ The names of the Overview components will be displayed.
 _Installation on other Linux distros should also be possible. See <https://docs.docker.com/installation/>._
 
 1. Install docker, as described at <https://docs.docker.com/installation/ubuntulinux/>.
-1. Install docker-compose, as described at <https://docs.docker.com/compose/install/>. Simplest is:  `sudo pip install docker-compose`
+1. Install docker-compose, as described at <https://docs.docker.com/compose/install/>. Simplest is: `sudo pip install docker-compose`
 1. If `git` is not installed, install it.
-1. Navigate to the directory where you want the Overview configuration files to be installed. Run:
-
-        git clone https://github.com/overview/overview-local.git
-
-The result should be a directory called _overview-local_.
-
+1. Navigate to the directory where you want the Overview configuration files to be installed. Run `git clone https://github.com/overview/overview-local.git`. The result should be a directory called _overview-local_.
 1. `cd overview-local`
 1. `./run-overview.sh`
 
-This will start to download all the Overview components. The download may take a while, depending on your connection speed.  After setup is complete, the names of the Overview components are displayed, and the command prompt will be available again.
-
-1. Open <http://localhost:9000> in your browser.
+This will start to download all the Overview components. The download may take
+minutes or hours, depending on your connection speed. When it's done, you'll
+be presented with a link. Open it in your web browser.
 
 ### Configuring Docker on OS X and Windows
 
