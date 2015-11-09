@@ -1,7 +1,0 @@
-
-
-
-apply-evolutions:
-  image: overview/db-evolution-applier
-  external_links:
-    - overview-database

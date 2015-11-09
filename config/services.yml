@@ -1,37 +1,25 @@
-
-overview-database-data:
-  image: postgres:9.4
-  container_name: overview-database-data
-  volumes:
-    - /var/lib/postgresql/data
-  command: /bin/true
-
-overview-searchindex-data:
-  image: elasticsearch:1.7
-  container_name: overview-searchindex-data
-  volumes:
-    - /usr/share/elasticsearch/data
-  command: /bin/true
+overview-network:
+  container_name: overview-network
+  image: busybox
+  command: /bin/sleep 99999999d # run forever
+  ports:
+    - "9000:9000" # overview-web will eventually listen on port 9000
 
 overview-database:
-  image: overview/database
   container_name: overview-database
-  restart: on-failure
+  image: overview/database
+  net: container:overview-network
   volumes_from:
     - overview-database-data
 
-redis:
-  image: redis:2.8
+overview-redis:
   container_name: overview-redis 
-  restart: on-failure
+  net: container:overview-network
+  image: redis:2.8
 
 overview-searchindex:
-  image: elasticsearch:1.7
   container_name: overview-searchindex
+  image: overview/searchindex
+  net: container:overview-network
   volumes_from:
     - overview-searchindex-data
-  restart: on-failure
-  command: elasticsearch \
-      -Des.cluster.name="DevSearchIndex" \
-      -Des.node.name="SearchIndex" \
-      -Des.index.number_of_shards=1 

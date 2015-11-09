@@ -1,39 +1,30 @@
 #!/bin/bash
 
-
-# The next release of docker-compose will allow environment
-# variables to be expanded in the yml file...
-echo DOCKER_HOST=$DOCKER_HOST > config/host.env
+docker-compose -f config/persistent.yml up
 
 docker-compose -f config/services.yml up -d
 
+docker run \
+  --link overview-database \
+  --rm busybox \
+  /bin/sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
-docker run --name up-checker-database --link overview-database --rm overview/up-checker database
+docker run --net container:overview-network --rm overview/db-evolution-applier
 
-docker-compose -f config/db-setup.yml up
 docker-compose -f config/overview.yml up -d
-
-
 docker-compose -f config/plugins.yml up -d
 
-## Try to wait for server to start and then open 
-## a browser window to the Overview url
-docker run --name up-checker-web --env-file config/host.env --rm overview/up-checker frontend
+GATEWAY_HOST=$(docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
 
+docker run \
+  --env "DOCKER_HOST=$GATEWAY_HOST" \
+  --link overview-database \
+  --rm overview/plugin-setup
 
-PLUGIN_HOST=$(echo ${DOCKER_HOST:-localhost} | sed 's/[a-zA-Z]*:\/\/\(.*\):.*/\1/')
+# Wait for the server to start
+docker run \
+  --link overview-web \
+  --rm busybox \
+  /bin/sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
 
-url=http://${PLUGIN_HOST}:9000
-
-## Only check for OS X and Ubuntu. Windows user must run a separate script
-browser_path=$(which open || which xdg-open)
-
-if [ -z "${browser_path}" ]; then
-  echo Goto $url with your browser
-else
-  ${browser_path} $url
-fi
-
-
-
-
+echo "Overview is running: browse to http://$GATEWAY_HOST:9000 to use it"

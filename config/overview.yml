@@ -1,49 +1,26 @@
-overview-blob-storage:
-  image: ubuntu:vivid
-  container_name: overview-blob-storage
-  volumes:
-    - /var/lib/overview/blob-storage
-  command: /bin/true
-
-documentset-worker:
+overview-documentset-worker:
+  container_name: overview-documentset-worker
   image: overview/documentset-worker
-  container_name: documentset-worker
-  external_links:
-    - overview-database
-    - overview-searchindex
+  net: container:overview-network
   volumes_from:
     - overview-blob-storage
   env_file:
     - overview.env
-  restart: on-failure
 
-
-worker:
+overview-worker:
+  container_name: overview-worker
   image: overview/worker
-  container_name: worker
-  external_links:
-    - overview-database
-    - overview-searchindex
+  net: container:overview-network
+  env_file:
+    - overview.env
+
+overview-web:
+  container_name: overview-web
+  image: overview/web
+  net: container:overview-network
   volumes_from:
     - overview-blob-storage
   env_file:
     - overview.env
-  restart: on-failure
-
-
-web:
-  image: overview/web
-  container_name: web
-  external_links:
-    - overview-database
-    - overview-redis
-    - overview-searchindex
-    - overview-documentset-worker
-  volumes_from:
-    - overview-blob-storage 
-  env_file:
-    - overview.env
-  restart: on-failure
   ports:
     - "9000:9000"
-

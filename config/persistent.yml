@@ -1,0 +1,20 @@
+overview-database-data:
+  container_name: overview-database-data
+  image: busybox
+  volumes:
+    - /var/lib/postgresql/data
+  command: /bin/true
+
+overview-searchindex-data:
+  container_name: overview-searchindex-data
+  image: busybox
+  volumes:
+    - /usr/share/elasticsearch/data
+  command: /bin/true
+
+overview-blob-storage:
+  container_name: overview-blob-storage
+  image: busybox
+  volumes:
+    - /var/lib/overview/blob-storage
+  command: /bin/true

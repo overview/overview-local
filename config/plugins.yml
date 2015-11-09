@@ -1,47 +1,39 @@
-
-
 overview-word-cloud:
-  image: overview/overview-word-cloud
   container_name: overview-word-cloud
-  restart: on-failure
+  image: overview/overview-word-cloud
+  external_links:
+    - overview-network
   ports:
     - "3000:3000"
 
 overview-entity-filter:
-  image: overview/overview-entity-filter
   container_name: overview-entity-filter
-  restart: on-failure
+  image: overview/overview-entity-filter
+  external_links:
+    - overview-network
   ports:
     - "3001:3000"
 
 overview-grep:
-  image: overview/overview-grep
   container_name: overview-grep
-  restart: on-failure
+  image: overview/overview-grep
+  external_links:
+    - overview-network
   ports:
     - "3002:3000"
 
 overview-file-browser:
-  image: overview/overview-file-browser
   container_name: overview-file-browser
-  restart: on-failure
+  image: overview/overview-file-browser
+  external_links:
+    - overview-network
   ports:
     - "3003:3000"
 
 overview-multi-search:
-  image: overview/overview-multi-search
   container_name: overview-multi-search
-  restart: on-failure
-  ports: 
-    - "3004:3000"
-
-
-plugin-setup:
-  image: overview/plugin-setup
-  container_name: plugin-setup
-  env_file: 
-    - host.env
+  image: overview/overview-multi-search
   external_links:
-    - overview-database
-  
-
+    - overview-network
+  ports:
+    - "3004:3000"
