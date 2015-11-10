@@ -38,4 +38,5 @@ docker run \
   --rm busybox \
   /bin/sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
 
+echo
 echo "Overview is running: browse to http://$GATEWAY_HOST:9000 to use it"
