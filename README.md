@@ -1,6 +1,3 @@
-Running Overview
-================
-
 We recommend the [public Overview server](https://www.overviewdocs.com). But we
 also support users who want to run Overview on their own machines.
 
@@ -20,9 +17,9 @@ You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
 errors? File an issue on GitHub.
 
-## Installation
+# Installation
 
-### Installation: Linux
+## Installation: Linux
 
 We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
 as well.
@@ -37,7 +34,7 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://172.17.42.1:9000/](http://172.17.42.1:9000/).)
 
-### Installation: Mac OS X
+## Installation: Mac OS X
 
 1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
 2. Install `git`, from [https://git-scm.com/downloads](https://git-scm.com/downloads).
@@ -48,7 +45,7 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
 
-### Installation: Windows
+## Installation: Windows
 
 1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
 2. Open the _Docker Quick Start Terminal_. (We'll call this "the terminal" from now on.)
@@ -58,7 +55,7 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
 
-### Giving Overview more resources (on OS X and Windows)
+## Giving Overview more resources (on OS X and Windows)
 
 On Linux, Overview gets access to system memory; Linux users should skip this
 section.
@@ -79,13 +76,13 @@ If Overview is running too slowly, try these steps to speed it up:
 You don't _need_ to use the command line. When you installed Docker, it gave
 you a "VirtualBox" icon. Open that program to change more settings.
 
-## Starting Overview when it's already installed
+# Starting Overview when it's already installed
 
 That `curl | sh` command above stored some files on your computer to make
 future startups quicker. Next time you want to start Overview, run
 `~/overview-local/start` in a terminal.
 
-## Upgrading Overview
+# Upgrading Overview
 
 Does Overview have some new features you want? Open a terminal and do this:
 
@@ -93,12 +90,12 @@ Does Overview have some new features you want? Open a terminal and do this:
 2. `~/overview-local/update`
 3. `~/overview-local/start`
 
-## Stopping Overview
+# Stopping Overview
 
 Overview uses lots of memory, and that can make your computer a bit sluggish.
 Open a terminal and run `~/overview-local/stop` to shut it down.
 
-## Debugging
+# Debugging
 
 If Overview isn't running correctly, we'd love for you to file an issue on our
 Issues page. Please open a terminal and run `~/overview-local/dump-logs` as
@@ -108,7 +105,7 @@ you.
 If you're curious, you can run `~/overview-local/tail-logs` and watch Overview's
 log messages as they appear, while you use Overview in a browser window.
 
-## Uninstalling
+# Uninstalling
 
 If you want Overview gone forever, open a terminal and run these commands:
 
