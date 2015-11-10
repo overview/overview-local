@@ -2,8 +2,8 @@
 
 fatal() {
   echo >&2 "Error: $1"
-  echo >&2 'Read the docs at http://github.com/overview/overview-local or'
-  echo >&2 'contact us at info@overviewdocs.com for help.'
+  echo >&2 'Read the docs at https://github.com/overview/overview-local or'
+  echo >&2 'contact us at https://github.com/overview/overview-local/issues'
   exit 1
 }
 
