@@ -31,7 +31,7 @@ If you need your own Overview instance, read on!
 The result should be a directory called _overview-local_.
 
 1. `cd overview-local`
-1. `./run-overview.sh`
+1. `./start`
 
 This will start to download all the Overview components. The download may take a while, depending on your connection speed. After setup is complete, the names of the Overview components are displayed, and the command prompt will be available again.
 
@@ -73,11 +73,13 @@ _Installation on other Linux distros should also be possible. See <https://docs.
 1. If `git` is not installed, install it.
 1. Navigate to the directory where you want the Overview configuration files to be installed. Run `git clone https://github.com/overview/overview-local.git`. The result should be a directory called _overview-local_.
 1. `cd overview-local`
-1. `./run-overview.sh`
+1. `./start`
 
 This will start to download all the Overview components. The download may take
 minutes or hours, depending on your connection speed. When it's done, you'll
 be presented with a link. Open it in your web browser.
+
+When you want to free up all the resources Overview is using, run `./stop`
 
 ### Configuring Docker on OS X and Windows
 
@@ -98,7 +100,7 @@ Overview will keep running until you restart the computer. Restarting does not r
 
 1. Start the `Docker Quick Start Terminal` application
 1. `cd overview-local` 
-1. `./run-overview.sh`
+1. `./start`
 
 
 ### For Windows
@@ -111,7 +113,7 @@ Overview will keep running until you restart the computer. Restarting does not r
 ### For Ubuntu
 
 1. `cd overview-local` 
-1. `./run-overview.sh`
+1. `./start`
 
 
 
@@ -123,23 +125,23 @@ Once new features have been deployed to http://overviewdocs.com, you can update 
 
 1. Start the `Docker Quick Start Terminal` application
 1. `cd overview-local`
-1. `./update-overview.sh`
-1. `./run-overview.sh`
+1. `./update`
+1. `./start`
 
 
 ### For Windows
 
 1. Start the `Docker Quick Start Terminal` application
 1. `cd overview-local/windows`
-1. `./update-overview.sh`
+1. `./update`
 1. `./init-overview.sh`
 1. `./start-overview.sh`
 
 ### For Ubuntu
 
 1. `cd overview-local`
-1. `./update-overview.sh`
-1. `./run-overview.sh`
+1. `./update`
+1. `./start`
 
 
 ## Issues
@@ -158,7 +160,7 @@ If this message is shown and there appears to be no progress after several minut
     * OS X and Windows: `docker-machine restart default`
     * Ubuntu: `sudo restart docker`
   - Delete the stuck download: `docker rmi $(docker images --filter 'dangling=true' -q --no-trunc)`
-  - Restart the command that was stuck (eg. `./run-overview.sh`, `./init-overview.sh`, `./update-overview.sh`)
+  - Restart the command that was stuck (eg. `./start`, `./init-overview.sh`, `./update`)
 
         
 ### No response from web server
@@ -184,7 +186,7 @@ Restart Docker:
     * OS X and Windows: `docker-machine restart default`
     * Ubuntu: `sudo restart docker`
   - On Windows, recreate containers `./init-overview.sh`.
-  - Restart overview (`./run-overview.sh` on Ubuntu and OS X,  or `./start-overview.sh` on Windows)
+  - Restart overview (`./start` on Ubuntu and OS X,  or `./start-overview.sh` on Windows)
 
 
 
