@@ -1,26 +1,35 @@
 #!/bin/sh
 
+echo "Ensuring storage is created..."
 docker-compose -f config/persistent.yml up
 
+echo "Launching database servers..."
 docker-compose -f config/services.yml up -d
 
+echo "Waiting for database..."
 docker run \
   --link overview-database \
   --rm busybox \
   /bin/sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
+echo "Applying latest schema..."
 docker run --net container:overview-network --rm overview/db-evolution-applier
 
+echo "Launching Overview..."
 docker-compose -f config/overview.yml up -d
+
+echo "Launching plugins..."
 docker-compose -f config/plugins.yml up -d
 
 GATEWAY_HOST=$(docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
 
+echo "Linking plugins to Overview..."
 docker run \
   --env "DOCKER_HOST=$GATEWAY_HOST" \
   --link overview-database \
   --rm overview/plugin-setup
 
+echo "Waiting for everything to come online..."
 # Wait for the server to start
 docker run \
   --link overview-web \
