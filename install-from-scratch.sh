@@ -14,6 +14,9 @@ hash docker-compose 2>/dev/null || fatal 'You must install `docker-compose` and 
 echo "Changing to home directory..."
 cd # We always install to the home directory; that's easier for new users.
 
+echo "Removing any previous overview-local repository..."
+rm -rf overview-local
+
 echo "Downloading overview-local repository..."
 git clone https://github.com/overview/overview-local.git
 
