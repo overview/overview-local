@@ -1,8 +1,10 @@
 #!/bin/sh
 
-docker-compose -f config/overview.yml stop
-docker-compose -f config/plugins.yml stop
-docker-compose -f config/services.yml stop
-docker-compose -f config/overview.yml rm -f
-docker-compose -f config/plugins.yml rm -f
-docker-compose -f config/services.yml rm -f
+CONFIG="$(dirname "$0")"/config
+
+docker-compose -f "$CONFIG"/overview.yml stop
+docker-compose -f "$CONFIG"/plugins.yml stop
+docker-compose -f "$CONFIG"/services.yml stop
+docker-compose -f "$CONFIG"/overview.yml rm -f
+docker-compose -f "$CONFIG"/plugins.yml rm -f
+docker-compose -f "$CONFIG"/services.yml rm -f

@@ -1,10 +1,12 @@
 #!/bin/sh
 
+CONFIG="$(dirname "$0")"/config
+
 echo "Ensuring storage is created..."
-docker-compose -f config/persistent.yml up
+docker-compose -f "$CONFIG"/persistent.yml up
 
 echo "Launching database servers..."
-docker-compose -f config/services.yml up -d
+docker-compose -f "$CONFIG"/services.yml up -d
 
 echo "Waiting for database..."
 docker run \
@@ -16,10 +18,10 @@ echo "Applying latest schema..."
 docker run --net container:overview-network --rm overview/db-evolution-applier
 
 echo "Launching Overview..."
-docker-compose -f config/overview.yml up -d
+docker-compose -f "$CONFIG"/overview.yml up -d
 
 echo "Launching plugins..."
-docker-compose -f config/plugins.yml up -d
+docker-compose -f "$CONFIG"/plugins.yml up -d
 
 GATEWAY_HOST=$(docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
 
