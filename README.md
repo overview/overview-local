@@ -5,10 +5,11 @@ Here are some reasons to run Overview on your own machine(s):
 
 * You want total control over your documents. (We think Overview is secure from
   most attacks; but we can't fight a subpoena.)
-* You'd like to develop your own visualization or processing [plugins](https://github.com/overview/overview-server/wiki/Overview-API-Overview)
 * You want to experiment with large document sets. (Overview can handle one or
   two gigabytes; above that, our servers may groan.)
-* You will need to work without Internet access.
+* You want to develop your own visualization or processing
+  [plugin](https://github.com/overview/overview-server/wiki/Writing-a-Plugin).
+* You need to work without Internet access.
 
 If you need your own Overview instance, read on!
 
