@@ -22,5 +22,3 @@ overview-web:
     - overview-blob-storage
   env_file:
     - overview.env
-  ports:
-    - "9000:9000"
