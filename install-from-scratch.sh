@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script is for people who browse the Web and copy/paste a single command
+# that starts Overview on a local computer.
+
 fatal() {
   echo >&2 "Error: $1"
   echo >&2 'Read the docs at https://github.com/overview/overview-local or'
