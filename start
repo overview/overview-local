@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
+. "$(dirname "$0")"/common.sh
 CONFIG="$(dirname "$0")"/config
 
 echo "Ensuring storage is created..."
