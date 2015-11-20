@@ -106,6 +106,10 @@ If you're in the midst of using Overview when you run this, the backup may be
 inconsistent. (We just use `tar` to back up a PostgreSQL directory.) To be safe,
 you should stop Overview before you back it up.
 
+The first time you run the backup, you'll get a lot of messages about pulling
+Docker images. That'll just happen the one time; every other invocation will be
+silent.
+
 # Restoring Overview from a backup
 
 After you've installed Overview and tested that it works, you can wipe all its
