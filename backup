@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Writes a backup of all Overview's dynamic data to "$1".
+#
+# Restore it by running "./restore-from-backup $1".
+
+BACKUP_BASENAME="$(basename "$1")"
+BACKUP_DIRNAME="$(realpath "$(dirname "$1")")"
+
+fail() {
+  echo "$1" >&2
+  exit 1
+}
+
+[ -z "$1" ] && fail "Usage: $0 backup-filename.tar.gz"
+(echo "$BACKUP_BASENAME" | grep -q ' ') && fail "Your backup filename must not include spaces"
+
+. "$(dirname "$0")"/common.sh
+
+# We use ubuntu, not busybox, because its tar/gzip are far faster
+#
+# Plus, the "-p" flag is handy
+docker run \
+  --volumes-from overview-database-data:ro \
+  --volumes-from overview-searchindex-data:ro \
+  --volumes-from overview-blob-storage:ro \
+  --volume "$BACKUP_DIRNAME":/out \
+  --rm ubuntu:15.10 \
+  /bin/sh -c "tar -czpf /out/$BACKUP_BASENAME -C / var/lib/postgresql/data usr/share/elasticsearch/data var/lib/overview/blob-storage"

@@ -95,6 +95,27 @@ Does Overview have some new features you want? Open a terminal and do this:
 Overview uses lots of memory, and that can make your computer a bit sluggish.
 Open a terminal and run `~/overview-local/stop` to shut it down.
 
+# Backing up Overview's data
+
+You can copy all Overview's data into a single file.
+
+Run `~/overview-local/backup backup.tar.gz` and then store `backup.tar.gz`
+somewhere safe.
+
+If you're in the midst of using Overview when you run this, the backup may be
+inconsistent. (We just use `tar` to back up a PostgreSQL directory.) To be safe,
+you should stop Overview before you back it up.
+
+# Restoring Overview from a backup
+
+After you've installed Overview and tested that it works, you can wipe all its
+data and replace it with a backup's data.
+
+Run `~/overview-local/restore-from-backup backup.tar.gz`, where `backup.tar.gz`
+is your backup file.
+
+This command will stop Overview itself.
+
 # Debugging
 
 If Overview isn't running correctly, we'd love for you to file an issue on our

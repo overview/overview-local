@@ -2,8 +2,8 @@
 
 abort() {
   errcode=$?
-  echo '`'"$BASH_COMMAND"'` failed with error '$? >&2
+  [ "$errcode" != "0" ] && echo "Command failed with error $errcode" >&2
   exit $errcode
 }
-trap 'abort' ERR
+trap 'abort' INT TERM EXIT
 set -e

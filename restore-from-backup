@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Writes a backup of all Overview's dynamic data to "$1".
+#
+# Restore it by running "./restore $1".
+
+DIRNAME="$(dirname "$0")"
+BACKUP_BASENAME="$(basename "$1")"
+BACKUP_DIRNAME="$(realpath "$(dirname "$1")")"
+
+fail() {
+  echo "$1" >&2
+  exit 1
+}
+
+[ -f "$1" ] || fail "Usage: $0 backup-filename.tar.gz"
+(echo "$BACKUP_BASENAME" | grep -q ' ') && fail "Your backup filename must not include spaces"
+
+echo "This will DESTROY all Overview's live data!"
+echo
+read -p "Are you sure? [yn] " REPLY
+[ "$REPLY" = "y" ] || fail 'You did not enter "y". Aborting.'
+
+. "$(dirname "$0")"/common.sh
+
+echo "Ensuring Overview is not running..."
+"$DIRNAME"/stop
+
+echo "Inserting backup data..."
+# We use ubuntu, not busybox, because its tar/gzip are far faster
+#
+# Plus, the "-p" flag is handy
+docker run \
+  --volumes-from overview-database-data:rw \
+  --volumes-from overview-searchindex-data:rw \
+  --volumes-from overview-blob-storage:rw \
+  --volume "$BACKUP_DIRNAME":/out \
+  --rm ubuntu:15.10 \
+  /bin/sh -c "rm -rf /var/lib/postgresql/data/* /usr/share/elasticsearch/data/* /var/lib/overview/blob-storage/* && tar -xzpf /out/$BACKUP_BASENAME -C /"
+
+echo "Restore complete!"
+echo "Run \"$DIRNAME/start\" to start Overview with the restored data."
