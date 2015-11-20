@@ -120,6 +120,13 @@ is your backup file.
 
 This command will stop Overview itself.
 
+Overview backups are forward-compatible with newer versions of Overview for one
+year. In other words: if you keep Overview up to date (by running `update`), you
+will be able to restore from any backup that is less than one year old. (Don't
+take that to mean a two-year-old backup is worthless. You can restore and
+re-backup your data with interim versions of Overview to bring it up to date. We
+haven't written instructions for this task.)
+
 # Debugging
 
 If Overview isn't running correctly, we'd love for you to file an issue on our
