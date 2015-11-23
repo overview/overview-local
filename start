@@ -3,6 +3,9 @@
 . "$(dirname "$0")"/common.sh
 CONFIG="$(dirname "$0")"/config
 
+echo "Updating overview-local repository..."
+git pull -q --rebase
+
 echo "Ensuring storage is created..."
 docker-compose -f "$CONFIG"/persistent.yml up
 

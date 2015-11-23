@@ -137,6 +137,23 @@ you.
 If you're curious, you can run `~/overview-local/tail-logs` and watch Overview's
 log messages as they appear, while you use Overview in a browser window.
 
+# Setting options
+
+We set default options in `overview-local/config/overview.defaults.env`.
+**DO NOT EDIT `overview.defaults.env`**. Instead, copy/paste the variables you
+want to edit into `overview-local/config/overview.env` alongside it, and edit
+there.
+
+# Troubleshooting
+
+## `Cannot pull with rebase: You have unstaged changes.`
+
+Did you try editing `overview.defaults.env` (or any other file)? That would
+break Overview in a future version, and it's unnecessary. Copy the contents
+of `overview.defaults.env` into `overview.env`, then run `git reset --hard`.
+
+If that doesn't solve your problem, please add an issue to this project.
+
 # Uninstalling
 
 If you want Overview gone forever, open a terminal and run these commands:

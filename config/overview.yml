@@ -5,6 +5,7 @@ overview-documentset-worker:
   volumes_from:
     - overview-blob-storage
   env_file:
+    - overview.defaults.env
     - overview.env
 
 overview-worker:
@@ -12,6 +13,7 @@ overview-worker:
   image: overview/worker
   net: container:overview-network
   env_file:
+    - overview.defaults.env
     - overview.env
 
 overview-web:
@@ -21,4 +23,5 @@ overview-web:
   volumes_from:
     - overview-blob-storage
   env_file:
+    - overview.defaults.env
     - overview.env
