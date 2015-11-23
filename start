@@ -6,6 +6,8 @@ CONFIG="$(dirname "$0")"/config
 echo "Updating overview-local repository..."
 git pull -q --rebase
 
+[ -f "$CONFIG"/overview.env" ] || echo '# You may edit this file. Read overview.defaults.env for options.' > "$CONFIG"/overview.env
+
 echo "Ensuring storage is created..."
 docker-compose -f "$CONFIG"/persistent.yml up
 
