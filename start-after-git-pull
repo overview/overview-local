@@ -18,13 +18,15 @@ echo "Waiting for database..."
 # stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
 docker run \
   --link overview-database \
-  --env-file "$CONFIG"/overview.defaults.env \
-  --env-file "$CONFIG"/overview.env \
   --rm busybox \
   sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
 echo "Applying latest schema..."
-docker run --net container:overview-network --rm overview/db-evolution-applier
+docker run \
+  --net container:overview-network \
+  --env-file "$CONFIG"/overview.defaults.env \
+  --env-file "$CONFIG"/overview.env \
+  --rm overview/db-evolution-applier
 
 echo "Launching Overview..."
 docker-compose -f "$CONFIG"/overview.yml up -d
