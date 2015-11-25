@@ -1,10 +1,16 @@
 #!/bin/sh
 
 . "$(dirname "$0")"/common.sh
-CONFIG="$(dirname "$0")"/config
 
-docker-compose -f "$CONFIG"/services.yml pull
-docker-compose -f "$CONFIG"/overview.yml pull
-docker-compose -f "$CONFIG"/plugins.yml pull
-docker pull overview/db-evolution-applier
-docker pull overview/plugin-setup
+docker pull overview/database:latest
+docker pull overview/searchindex:latest
+docker pull overview/documentset-worker:latest
+docker pull overview/worker:latest
+docker pull overview/web:latest
+docker pull overview/overview-word-cloud:latest
+docker pull overview/overview-entity-filter:latest
+docker pull overview/overview-grep:latest
+docker pull overview/overview-file-browser:latest
+docker pull overview/overview-multi-search:latest
+docker pull overview/db-evolution-applier:latest
+docker pull overview/plugin-setup:latest
