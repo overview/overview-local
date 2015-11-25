@@ -26,4 +26,4 @@ docker run \
   --volumes-from overview-blob-storage:ro \
   --volume "$BACKUP_DIRNAME":/out \
   --rm ubuntu:15.10 \
-  /bin/sh -c "tar -czpf /out/$BACKUP_BASENAME -C / var/lib/postgresql/data usr/share/elasticsearch/data var/lib/overview/blob-storage"
+  tar -czpf /out/$BACKUP_BASENAME -C / var/lib/postgresql/data usr/share/elasticsearch/data var/lib/overview/blob-storage

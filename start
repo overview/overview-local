@@ -17,10 +17,12 @@ echo "Launching database servers..."
 docker-compose -f "$CONFIG"/services.yml up -d
 
 echo "Waiting for database..."
+# Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
+# stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
 docker run \
   --link overview-database \
   --rm busybox \
-  /bin/sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
+  sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
 echo "Applying latest schema..."
 docker run --net container:overview-network --rm overview/db-evolution-applier
@@ -44,7 +46,7 @@ echo "Waiting for everything to come online..."
 docker run \
   --link overview-web \
   --rm busybox \
-  /bin/sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
+  sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
 
 echo
 echo "Overview is running: browse to http://$GATEWAY_HOST:9000 to use it"
