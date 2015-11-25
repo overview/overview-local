@@ -1,10 +1,12 @@
 #!/bin/sh
 
-. "$(dirname "$0")"/common.sh
+DIRNAME="$(dirname "$0")"
 CONFIG="$(dirname "$0")"/config
 
+. "$DIRNAME"/common.sh
+
 echo "Updating overview-local repository..."
-git pull -q --rebase
+(cd "$DIRNAME" && git pull -q --rebase)
 
 [ -f "$CONFIG"/overview.env ] || echo '# You may edit this file. Read overview.defaults.env for options.' > "$CONFIG"/overview.env
 
