@@ -1,0 +1,51 @@
+#!/bin/sh
+
+DIRNAME="$(dirname "$0")"
+CONFIG="$(dirname "$0")"/config
+
+. "$DIRNAME"/common.sh
+
+[ -f "$CONFIG"/overview.env ] || echo '# You may edit this file. Read overview.defaults.env for options.' > "$CONFIG"/overview.env
+
+echo "Ensuring storage is created..."
+docker-compose -f "$CONFIG"/persistent.yml up
+
+echo "Launching database servers..."
+docker-compose -f "$CONFIG"/services.yml up -d
+
+echo "Waiting for database..."
+# Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
+# stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
+docker run \
+  --link overview-database \
+  --env-file "$CONFIG"/overview.defaults.env \
+  --env-file "$CONFIG"/overview.env \
+  --rm busybox \
+  sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
+
+echo "Applying latest schema..."
+docker run --net container:overview-network --rm overview/db-evolution-applier
+
+echo "Launching Overview..."
+docker-compose -f "$CONFIG"/overview.yml up -d
+
+echo "Launching plugins..."
+docker-compose -f "$CONFIG"/plugins.yml up -d
+
+GATEWAY_HOST=$(docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
+
+echo "Linking plugins to Overview..."
+docker run \
+  --env "DOCKER_HOST=$GATEWAY_HOST" \
+  --link overview-database \
+  --rm overview/plugin-setup
+
+echo "Waiting for everything to come online..."
+# Wait for the server to start
+docker run \
+  --link overview-web \
+  --rm busybox \
+  sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
+
+echo
+echo "Overview is running: browse to http://$GATEWAY_HOST:9000 to use it"
