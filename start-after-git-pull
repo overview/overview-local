@@ -34,7 +34,7 @@ docker-compose -f "$CONFIG"/overview.yml up -d
 echo "Launching plugins..."
 docker-compose -f "$CONFIG"/plugins.yml up -d
 
-GATEWAY_HOST=$(docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
+GATEWAY_HOST=$(docker-machine ip default 2>/dev/null || docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
 
 echo "Linking plugins to Overview..."
 docker run \
