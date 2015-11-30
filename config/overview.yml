@@ -1,17 +1,9 @@
-overview-documentset-worker:
-  container_name: overview-documentset-worker
-  image: overview/documentset-worker
-  net: container:overview-network
-  volumes_from:
-    - overview-blob-storage
-  env_file:
-    - overview.defaults.env
-    - overview.env
-
 overview-worker:
   container_name: overview-worker
   image: overview/worker
   net: container:overview-network
+  volumes_from:
+    - overview-blob-storage
   env_file:
     - overview.defaults.env
     - overview.env
