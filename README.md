@@ -137,12 +137,14 @@ you.
 If you're curious, you can run `~/overview-local/tail-logs` and watch Overview's
 log messages as they appear, while you use Overview in a browser window.
 
-# Setting options
+# Configuration
 
 We set default options in `overview-local/config/overview.defaults.env`.
 **DO NOT EDIT `overview.defaults.env`**. Instead, copy/paste the variables you
 want to edit into `overview-local/config/overview.env` alongside it, and edit
 there.
+
+Configuration options are documented here: https://github.com/overview/overview-server/wiki/Configuration
 
 # Troubleshooting
 
