@@ -155,13 +155,13 @@ To restore, spin up the virtual machine from its snapshot:
 
 1. Open the "Oracle VM VirtualBox" program that came with Docker.
 2. Click the "default" machine.
-3. If the machine isn't "Powered Off", do so now: in the toolbar, click
+3. If the machine isn't "Powered Off", power it off: in the toolbar, click
    "Machine" -> "Close" -> "Power Off".
 4. Click the "snapshots" button at the right of the toolbar.
 5. Click the snapshot you saved earlier.
 6. Click the "Restore selected snapshot" button. You'll be prompted to
    create *another* snapshot, which you may opt for; either way, click "Restore".
-7. Close VirtualBox
+7. Close Oracle VM VirtualBox whenever you wish.
 8. In your console, run `docker-machine start default`
 
 # Debugging
