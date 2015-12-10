@@ -162,7 +162,7 @@ To restore, spin up the virtual machine from its snapshot:
 6. Click the "Restore selected snapshot" button. You'll be prompted to
    create *another* snapshot, which you may opt for; either way, click "Restore".
 7. Close VirtualBox
-8. In your console, run `docker-machine start defaualt`
+8. In your console, run `docker-machine start default`
 
 # Debugging
 
