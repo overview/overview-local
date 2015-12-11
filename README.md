@@ -198,6 +198,13 @@ If that doesn't solve your problem, please add an issue to this project.
 There's a bug in Docker v1.9.1, only on Windows and Mac OS X. We've documented
 more at https://groups.google.com/d/msg/overview-dev/_dEE10njjCk/rVyl6GZkAAAJ.
 
+## Microsoft Edge says "Hmm, we can't reach this page."
+
+We are aware of this issue: it affects lots of projects that use our technology.
+We know of no workaround at present. Use any other web browser -- even Internet
+Explorer, which also comes pre-installed on your Windows computer -- and
+Overview will work fine.
+
 # Uninstalling
 
 If you want Overview gone forever, open a terminal and run these commands:
