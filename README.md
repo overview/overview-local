@@ -5,8 +5,8 @@ Here are some reasons to run Overview on your own machine(s):
 
 * You want total control over your documents. (We think Overview is secure from
   most attacks; but we can't fight a subpoena.)
-* You want to experiment with large document sets. (Overview can handle one or
-  two gigabytes; above that, our servers may groan.)
+* You want to experiment with large document sets. (overviewdocs.com is limited to one or
+  two gigabytes)
 * You want to develop your own visualization or processing
   [plugin](https://github.com/overview/overview-server/wiki/Writing-a-Plugin).
 * You need to work without Internet access.
@@ -18,6 +18,8 @@ we'll guide you carefully. Copy/paste each command, and all should be fine. Any
 errors? File an issue on GitHub.
 
 # Installation
+
+**Note: At the moment Windows and Mac installation require docker 1.9.0 and not the latest 1.9.1, due to an ongoing [bug](ec2-52-87-230-123.compute-1.amazonaws.com) which means the stock instructions below will not work :(**
 
 ## Installation: Linux
 
