@@ -19,7 +19,7 @@ errors? File an issue on GitHub.
 
 # Installation
 
-**Note: At the moment Windows and Mac installation require docker 1.9.0 and not the latest 1.9.1, due to an ongoing [bug](ec2-52-87-230-123.compute-1.amazonaws.com) which means the stock instructions below will not work :(**
+**Note: At the moment Windows and Mac installation require docker 1.9.0 and not the latest 1.9.1, due to an ongoing [docker bug](ec2-52-87-230-123.compute-1.amazonaws.com) which means the stock instructions below will not work :( Linux install should work fine.**
 
 ## Installation: Linux
 
