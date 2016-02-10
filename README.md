@@ -105,7 +105,7 @@ Open a terminal and run `~/overview-local/stop` to shut it down.
 
 Overview-local runs by default in single user mode, meaning there is only one user and no logins. To enable logins and multiple users, add the following line to `~/overview-local/config/overview.env`
 
-    `OVERVIEW_MULTI_USER=true`
+    OVERVIEW_MULTI_USER=true
 
 The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page won't do anything unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
 
@@ -217,7 +217,7 @@ Configuration options are documented [here](https://github.com/overview/overview
 
 This can happen if you are running a server that is accessible by other machines. Overview gets confused about the externally reachable address of the plugin servers. To fix this, set the OVERVIEW_ADDRESS environment variable before starting the server, like this:
 
-    `OVERVIEW_ADDRESS=52.87.230.123`
+    OVERVIEW_ADDRESS=52.87.230.123
     ./start
 
 Note that plugins communicate with the server on ports 3000-3100 (defined [here](https://github.com/overview/overview-local/blob/master/config/plugins.yml)) so adjust your firewall accordingly.
