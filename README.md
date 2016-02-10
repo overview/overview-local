@@ -9,14 +9,25 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
 
 # Contents
 - [Installation](#installation)
+   - [Linux](#linux)
+   - [Mac](#mac)
+   - [Windows](#windows)
+   - [Giving Overview enough resources](#resources)
 - [Administration](#administration)
+   - [Starting Overview](#starting)
+   - [Stopping Overview](#stopping)
+   - [Upgrading Overview](#upgrading)
+   - [Enabling multi-user mode](#multi-user)
+   - [Backing up on Linix](#backuplinux)
+   - [Backing up on Windows and Mac](#backupwinmac)
+   - [Uninstalling](#uninstalling)
 - [Troubleshooting](#troubleshooting)
 
 # <a name="installation">Installation</a>
 
 **Note: At the moment Windows and Mac installation require docker 1.9.0 and not the latest 1.9.1, due to an ongoing [docker bug](ec2-52-87-230-123.compute-1.amazonaws.com) which means the stock instructions below will not work :( Linux install should work fine.**
 
-## Installation: Linux
+## <a name="linux">Installation: Linux</a>
 
 We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
 as well.
@@ -31,7 +42,7 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://172.17.42.1:9000/](http://172.17.42.1:9000/).)
 
-## Installation: Mac OS X
+## <a name="mac">Installation: Mac OS X</a>
 
 1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
 2. Install `git`, from [https://git-scm.com/downloads](https://git-scm.com/downloads).
@@ -43,7 +54,7 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
 
-## Installation: Windows
+## <a name="windows">Installation: Windows</a>
 
 1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
 2. Open the _Docker Quick Start Terminal_. (We'll call this "the terminal" from now on.)
@@ -54,9 +65,9 @@ If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
 (It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
 
-## Giving Overview more resources (on OS X and Windows)
+## <a name="resources">Giving Overview enough resources (on OS X and Windows)</a>
 
-Linux users should skip this section.
+Linux users should skip this section, but Windows and Mac users probably need it.
 
 On OS X and Windows, Overview runs in Docker's "virtual machine". The virtual
 machine restricts the amount of memory and number of processors Overview can
@@ -81,16 +92,26 @@ sooner.
 
 # <a name="administration">Administration</a>
 
-## Starting Overview
+## <a name="starting">Starting Overview</a>
 
 When you want to start Overview, run `~/overview-local/start` in a terminal.That `curl | sh` command you used to install Overview stored some files on your computer to make future startups much quicker. 
 
-## Stopping Overview
+## <a name="stopping">Stopping Overview</a>
 
 Overview uses lots of memory, and that can make your computer a bit sluggish.
 Open a terminal and run `~/overview-local/stop` to shut it down.
 
-## Upgrading Overview
+## <a name="multi-user">Enabling multi-user mode</a>
+
+Overview-local runs by default in single user mode, meaning there is only one user and no logins. To enable logins and multiple users, add the following line to `~/overview-local/config/overview.env`
+
+    `OVERVIEW_MULTI_USER=true`
+
+The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page won't do anything unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
+
+See also [configuration](#configuration) below.
+
+## <a name="upgrading">Upgrading Overview</a>
 
 Does Overview have some new features you want? Open a terminal and do this:
 
@@ -98,7 +119,7 @@ Does Overview have some new features you want? Open a terminal and do this:
 2. `~/overview-local/update`
 3. `~/overview-local/start`
 
-## Backing up Overview's data (on Linux)
+## <a name="backuplinux">Backing up Overview's data (on Linux)</a>
 
 You can copy all Overview's data into a single file.
 
@@ -113,7 +134,7 @@ The first time you run the backup, you'll get a lot of messages about pulling
 Docker images. That'll just happen the one time; every other invocation will be
 silent.
 
-## Restoring Overview from a backup (on Linux)
+## <a name="restorelinux">Restoring Overview from a backup (on Linux)</a>
 
 After you've installed Overview and tested that it works, you can wipe all its
 data and replace it with a backup's data.
@@ -130,7 +151,7 @@ take that to mean a two-year-old backup is worthless. You can restore and
 re-backup your data with interim versions of Overview to bring it up to date. We
 haven't written instructions for this task.)
 
-## Backing up and restoring Overview on Windows and Mac OS X
+## <a name="backupwinmac">Backing up and restoring Overview on Windows and Mac OS X</a>
 
 On Windows and Mac OS X, Overview is running within a "virtual machine". You can
 create "snapshots" of the machine's state and restore those snapshots to bring
@@ -161,7 +182,7 @@ To restore, spin up the virtual machine from its snapshot:
 7. Close Oracle VM VirtualBox whenever you wish.
 8. In your console, run `docker-machine start default`
 
-# Uninstalling
+# <a name="uninstalling">Uninstalling</a>
 
 If you want Overview gone forever, open a terminal and run these commands:
 
@@ -183,14 +204,23 @@ you.
 If you're curious, you can run `~/overview-local/tail-logs` and watch Overview's
 log messages as they appear, while you use Overview in a browser window.
 
-## Configuration
+## <a name="configutation">Configuration</a>
 
 We set default options in `overview-local/config/overview.defaults.env`.
 **DO NOT EDIT `overview.defaults.env`**. Instead, copy/paste the variables you
 want to edit into `overview-local/config/overview.env` alongside it, and edit
 there.
 
-Configuration options are documented here: https://github.com/overview/overview-server/wiki/Configuration
+Configuration options are documented [here](https://github.com/overview/overview-server/wiki/Configuration)
+
+## Plugin views are empty or show broken links
+
+This can happen if you are running a server that is accessible by other machines. Overview gets confused about the externally reachable address of the plugin servers. To fix this, set the OVERVIEW_ADDRESS environment variable before starting the server, like this:
+
+    `OVERVIEW_ADDRESS=52.87.230.123`
+    ./start
+
+Note that plugins communicate with the server on ports 3000-3100 (defined [here](https://github.com/overview/overview-local/blob/master/config/plugins.yml)) so adjust your firewall accordingly.
 
 ## `Cannot pull with rebase: You have unstaged changes.`
 
