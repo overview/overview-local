@@ -1,5 +1,5 @@
 We recommend the [public Overview server](https://www.overviewdocs.com). But we
-also support users who want to run Overview on their own machines.
+also support users who want to run Overview on their own machines. You'll want to do this if you need greater security, larger document sets, or custom modifications.
 
 You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
@@ -221,6 +221,8 @@ This can happen if you are running a server that is accessible by other machines
     ./start
 
 Note that plugins communicate with the server on ports 3000-3100 (defined [here](https://github.com/overview/overview-local/blob/master/config/plugins.yml)) so adjust your firewall accordingly.
+
+Also, only plugin views created after this change will work. Add a new view or re-upload your documents to get working plugins.
 
 ## `Cannot pull with rebase: You have unstaged changes.`
 
