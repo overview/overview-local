@@ -25,7 +25,7 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
 
 # <a name="installation">Installation</a>
 
-**Note: At the moment Windows and Mac installation require docker 1.9.0 and not the latest 1.9.1, due to an ongoing [docker bug](https://github.com/docker/docker/issues/18180) so please install accordingily. Linux install should work fine.**
+**Note: On Windows and Mac docker 1.9.1 will not work due to an ongoing [docker bug](https://github.com/docker/docker/issues/18180). Type `docker -v` to see which version you have. The latest version 1.10.1 may fix the problem, if not try 1.9.0. Linux install should work fine on any version.**
 
 ## <a name="linux">Installation: Linux</a>
 
