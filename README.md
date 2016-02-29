@@ -96,6 +96,17 @@ sooner.
 
 When you want to start Overview, run `~/overview-local/start` in a terminal.That `curl | sh` command you used to install Overview stored some files on your computer to make future startups much quicker. 
 
+On Windows and Mac, if you see this error
+
+    ERROR: Couldn't connect to Docker daemon - you might need to run `docker-machine start default`.
+   
+it means the Docker Virtual Machine got shut down, so you need to start it again by running these commands
+
+    docker-machine start default
+    eval "$(docker-machine env default)"
+
+then run `start` again.
+
 ## <a name="stopping">Stopping Overview</a>
 
 Overview uses lots of memory, and that can make your computer a bit sluggish.
