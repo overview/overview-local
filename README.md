@@ -18,7 +18,7 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
    - [Stopping Overview](#stopping)
    - [Upgrading Overview](#upgrading)
    - [Enabling multi-user mode](#multi-user)
-   - [Backing up on Linix](#backuplinux)
+   - [Backing up on Linux](#backuplinux)
    - [Backing up on Windows and Mac](#backupwinmac)
    - [Uninstalling](#uninstalling)
 - [Troubleshooting](#troubleshooting)
