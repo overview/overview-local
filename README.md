@@ -50,7 +50,10 @@ coffee; in half an hour or so, return to see Overview's URL on the screen.
 2. Install `git`, from [https://git-scm.com/downloads](https://git-scm.com/downloads).
 3. Open the _Docker Quick Start Terminal_. (We'll call this "the terminal" from now on.)
 4. Give Overview more resources (see below)
-5. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
+5. Start Docker by entering the following commands
+    docker-machine start default
+    eval "$(docker-machine env default)"
+6. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
