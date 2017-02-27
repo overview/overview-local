@@ -52,8 +52,8 @@ coffee; in half an hour or so, return to see Overview's URL on the screen.
 4. Give Overview more resources (see below)
 5. Start Docker by entering the following commands
 
-    docker-machine start default
-    eval "$(docker-machine env default)"
+       docker-machine start default
+       eval "$(docker-machine env default)"
     
 6. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
