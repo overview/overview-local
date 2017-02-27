@@ -33,10 +33,12 @@ We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
 as well.
 
 0. Open the "Terminal" program.
-1. Install dependencies. On Ubuntu: `sudo apt-get install git docker`
+1. Install dependencies. On Ubuntu: `sudo apt-get install git docker.io`
 2. Install `docker-compose`. You'll need version 1.4 or higher. On Ubuntu: `sudo pip install docker-compose`
 3. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then log out (of your entire desktop environment) and log back in.
 4. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
+
+If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` you probably need to log out and back in again, so that the newly updated environment variables can take effect.
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
