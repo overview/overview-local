@@ -35,8 +35,11 @@ as well.
 0. Open the "Terminal" program.
 1. Install dependencies. On Ubuntu: `sudo apt-get install git docker.io`
 2. Install `docker-compose`. You'll need version 1.4 or higher. On Ubuntu: `sudo pip install docker-compose`
-3. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then log out (of your entire desktop environment) and log back in.
+3. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then *log out* (of your entire desktop environment) and *log back in*. You can check the docker groups with the `groups` command to see that it is working.
 4. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
+
+You may need to install a few things to get `pip`; `sudo apt-get install python-setuptools python-dev build-essential`
+`sudo easy_install pip`. 
 
 If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` you probably need to log out and back in again, so that the newly updated environment variables can take effect.
 
@@ -131,6 +134,10 @@ Does Overview have some new features you want? Open a terminal and do this:
 1. `~/overview-local/stop`
 2. `~/overview-local/update`
 3. `~/overview-local/start`
+
+The `update` command pulls down any changed docker images from Docker Hub. If you are wondering how to update the docker images please see [Overview Docker](https://github.com/overview/overview-docker).
+
+Be aware that the `start` command also updates the overview-local code locally. 
 
 ## <a name="backuplinux">Backing up Overview's data (on Linux)</a>
 
