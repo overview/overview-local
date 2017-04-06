@@ -1,4 +1,4 @@
-# Behavior used by all our scripts
+# Behavior used by all our scripts - trap errors and report to user if any command fails
 
 abort() {
   errcode=$?
