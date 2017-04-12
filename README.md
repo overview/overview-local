@@ -121,9 +121,9 @@ Open a terminal and run `~/overview-local/stop` to shut it down.
 
 Overview-local runs by default in single user mode, meaning there is only one user and no logins. To enable logins and multiple users, add the following line to `~/overview-local/config/overview.env`
 
-    OVERVIEW_MULTI_USER=true
+    OV_MULTI_USER=true
 
-The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page won't do anything unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
+The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page will by default print confirmation and password reset emails to the console, unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
 
 See also [configuration](#configuration) below.
 
