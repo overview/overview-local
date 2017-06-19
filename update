@@ -3,7 +3,6 @@
 . "$(dirname "$0")"/common.sh
 
 docker pull overview/database:latest
-docker pull overview/searchindex:latest
 docker pull overview/worker:latest
 docker pull overview/web:latest
 docker pull overview/overview-word-cloud:latest

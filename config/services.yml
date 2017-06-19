@@ -16,10 +16,3 @@ overview-redis:
   container_name: overview-redis 
   net: container:overview-network
   image: redis:2.8
-
-overview-searchindex:
-  container_name: overview-searchindex
-  image: overview/searchindex
-  net: container:overview-network
-  volumes_from:
-    - overview-searchindex-data

@@ -9,7 +9,7 @@ overview-searchindex-data:
   container_name: overview-searchindex-data
   image: busybox
   volumes:
-    - /usr/share/elasticsearch/data
+    - /opt/overview/searchindex
   command: /bin/true
 
 overview-blob-storage:

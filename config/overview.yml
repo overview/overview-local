@@ -4,6 +4,7 @@ overview-worker:
   net: container:overview-network
   volumes_from:
     - overview-blob-storage
+    - overview-searchindex-data
   env_file:
     - overview.defaults.env
     - overview.env

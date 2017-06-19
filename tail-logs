@@ -2,7 +2,7 @@
 
 . "$(dirname "$0")"/common.sh
 
-ALL="overview-database overview-redis overview-searchindex overview-worker overview-web overview-word-cloud overview-entity-filter overview-grep overview-file-browser overview-multi-search"
+ALL="overview-database overview-redis overview-worker overview-web overview-word-cloud overview-entity-filter overview-grep overview-file-browser overview-multi-search"
 
 for service in $ALL; do
   docker logs --follow $service | sed -e "s/^/[$service] /" &
