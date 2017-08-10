@@ -36,11 +36,14 @@ docker-compose -f "$CONFIG"/plugins.yml up -d
 
 GATEWAY_HOST=$(test $OVERVIEW_ADDRESS && echo $OVERVIEW_ADDRESS || docker-machine ip default 2>/dev/null || docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
 
-echo "Linking plugins to Overview at $GATEWAY_HOST..."
-docker run \
-  --env "DOCKER_HOST=$GATEWAY_HOST" \
-  --link overview-database \
-  --rm overview/plugin-setup
+link_plugins() {
+  echo "Linking plugins to Overview at $GATEWAY_HOST..."
+  docker run \
+    --env "DOCKER_HOST=$GATEWAY_HOST" \
+    --link overview-database \
+    --rm overview/plugin-setup
+}
+grep --silent '^SKIP_PLUGIN_SETUP=true$' config/overview.env || link_plugins
 
 echo "Waiting for everything to come online..."
 # Wait for the server to start
