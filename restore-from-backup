@@ -36,7 +36,7 @@ docker run \
   --volumes-from overview-blob-storage:rw \
   --volume "$BACKUP_DIRNAME":/out \
   --rm ubuntu:15.10 \
-  sh -c "rm -rf /var/lib/postgresql/data/* /var/lib/overview/searchindex/* /var/lib/overview/blob-storage/* && tar -xzpf /out/$BACKUP_BASENAME -C /"
+  sh -c "rm -rf /var/lib/postgresql/data/* /opt/overview/searchindex/* /var/lib/overview/blob-storage/* && tar -xzpf /out/$BACKUP_BASENAME -C /"
 
 echo "Restore complete!"
 echo "Run \"$DIRNAME/start\" to start Overview with the restored data."
