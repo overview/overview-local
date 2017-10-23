@@ -18,7 +18,7 @@ echo "Waiting for database..."
 # stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
 docker run \
   --link overview-database \
-  --rm busybox \
+  --rm "$BUSYBOX_IMAGE" \
   sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
 echo "Applying latest schema..."
@@ -49,8 +49,8 @@ echo "Waiting for everything to come online..."
 # Wait for the server to start
 docker run \
   --link overview-web \
-  --rm busybox \
-  sh -c 'until $(echo | nc overview-web 9000 2>/dev/null); do sleep 1; done'
+  --rm "$BUSYBOX_IMAGE" \
+  sh -c 'until $(nc overview-web 9000 2>/dev/null); do sleep 1; done'
 
 echo
 echo "Overview is running: browse to http://$GATEWAY_HOST:9000 to use it"

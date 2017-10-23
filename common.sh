@@ -7,3 +7,8 @@ abort() {
 }
 trap 'abort' INT TERM EXIT
 set -e
+
+# Use versioned dependency images. We run busybox+ubuntu from the command
+# line, and their programs' calling conventions have been known to change.
+BUSYBOX_IMAGE="library/busybox:1.27.2"
+UBUNTU_IMAGE="library/ubuntu:17.10"

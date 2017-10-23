@@ -35,7 +35,7 @@ docker run \
   --volumes-from overview-searchindex-data:rw \
   --volumes-from overview-blob-storage:rw \
   --volume "$BACKUP_DIRNAME":/out \
-  --rm ubuntu:15.10 \
+  --rm "$UBUNTU_IMAGE" \
   sh -c "rm -rf /var/lib/postgresql/data/* /var/lib/overview/searchindex/* /var/lib/overview/blob-storage/* && tar -xzpf /out/$BACKUP_BASENAME -C /"
 
 echo "Restore complete!"
