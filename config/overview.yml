@@ -1,20 +1,82 @@
-overview-worker:
-  container_name: overview-worker
-  image: overview/worker
-  net: container:overview-network
-  volumes_from:
-    - overview-blob-storage
-    - overview-searchindex-data
-  env_file:
-    - overview.defaults.env
-    - overview.env
+version: '2'
+services:
+  overview-worker:
+    container_name: overview-worker
+    image: overview/worker
+    volumes:
+      - overview-blob-storage:/var/lib/overview/blob-storage
+      - overview-searchindex-data:/var/lib/overview/searchindex
+    env_file:
+      - overview.defaults.env
+      - overview.env
 
-overview-web:
-  container_name: overview-web
-  image: overview/web
-  net: container:overview-network
-  volumes_from:
-    - overview-blob-storage
-  env_file:
-    - overview.defaults.env
-    - overview.env
+  overview-web:
+    container_name: overview-web
+    image: overview/web
+    ports:
+      - '0.0.0.0:9000:9000'
+    volumes:
+      - overview-blob-storage:/var/lib/overview/blob-storage
+    env_file:
+      - overview.defaults.env
+      - overview.env
+
+  overview-database:
+    container_name: overview-database
+    image: overview/database
+    volumes:
+      - overview-database-data:/var/lib/postgresql/data
+
+  overview-redis:
+    container_name: overview-redis
+    image: redis:2.8
+
+  # === plugins ===
+  overview-word-cloud:
+    container_name: overview-word-cloud
+    image: overview/overview-word-cloud
+    environment:
+      - PORT=3000
+    ports:
+      - '0.0.0.0:3000:3000'
+
+  overview-entity-filter:
+    container_name: overview-entity-filter
+    image: overview/overview-entity-filter
+    environment:
+      - PORT=3001
+    ports:
+      - '0.0.0.0:3001:3001'
+
+  overview-grep:
+    container_name: overview-grep
+    image: overview/overview-grep
+    environment:
+      - PORT=3002
+    ports:
+      - '0.0.0.0:3002:3002'
+
+  overview-file-browser:
+    container_name: overview-file-browser
+    image: overview/overview-file-browser
+    environment:
+      - PORT=3003
+    ports:
+      - '0.0.0.0:3003:3003'
+
+  overview-multi-search:
+    container_name: overview-multi-search
+    image: overview/overview-multi-search
+    environment:
+      - PORT=3004
+    ports:
+      - '0.0.0.0:3004:3004'
+
+volumes:
+  overview-blob-storage:
+  overview-database-data:
+  overview-searchindex-data:
+
+networks:
+  default:
+

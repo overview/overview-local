@@ -12,3 +12,5 @@ set -e
 # line, and their programs' calling conventions have been known to change.
 BUSYBOX_IMAGE="library/busybox:1.27.2"
 UBUNTU_IMAGE="library/ubuntu:17.10"
+
+DOCKER_COMPOSE="docker-compose -f $(dirname "$0")/config/overview.yml --project-name overview-local"

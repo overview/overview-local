@@ -1,13 +1,8 @@
 #!/bin/sh
 
 . "$(dirname "$0")"/common.sh
-CONFIG="$(dirname "$0")"/config
 
 set +e
 
-docker-compose -f "$CONFIG"/overview.yml stop
-docker-compose -f "$CONFIG"/plugins.yml stop
-docker-compose -f "$CONFIG"/services.yml stop
-docker-compose -f "$CONFIG"/overview.yml rm -f
-docker-compose -f "$CONFIG"/plugins.yml rm -f
-docker-compose -f "$CONFIG"/services.yml rm -f
+$DOCKER_COMPOSE kill
+$DOCKER_COMPOSE rm -f

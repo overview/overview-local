@@ -2,9 +2,4 @@
 
 . "$(dirname "$0")"/common.sh
 
-ALL="overview-database overview-redis overview-worker overview-web overview-word-cloud overview-entity-filter overview-grep overview-file-browser overview-multi-search"
-
-for service in $ALL; do
-  echo "***** DUMPING LOG: $service *****"
-  docker logs $service
-done
+exec $DOCKER_COMPOSE logs --timestamps --tail=all --no-color

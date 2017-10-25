@@ -3,44 +3,41 @@
 DIRNAME="$(dirname "$0")"
 CONFIG="$(dirname "$0")"/config
 
+NETWORK="overviewlocal_default"
+
 . "$DIRNAME"/common.sh
 
 [ -f "$CONFIG"/overview.env ] || echo '# You may edit this file. Read overview.defaults.env for options.' > "$CONFIG"/overview.env
 
-echo "Ensuring storage is created..."
-docker-compose -f "$CONFIG"/persistent.yml up
+. "$DIRNAME"/lib/upgrade-obsolete-volumes.sh
+migrate_volumes_if_needed
 
-echo "Launching database servers..."
-docker-compose -f "$CONFIG"/services.yml up -d
-
-echo "Waiting for database..."
+echo "Launching database..."
+$DOCKER_COMPOSE up -d overview-database
 # Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
 # stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
 docker run \
-  --link overview-database \
+  --net "$NETWORK" \
   --rm "$BUSYBOX_IMAGE" \
-  sh -c 'until $(echo | nc overview-database 5432 2>/dev/null); do sleep 1; done'
+  sh -c 'until $(nc overview-database 5432 2>/dev/null); do sleep 1; done'
 
 echo "Applying latest schema..."
 docker run \
-  --net container:overview-network \
+  --net "$NETWORK" \
   --env-file "$CONFIG"/overview.defaults.env \
   --env-file "$CONFIG"/overview.env \
   --rm overview/db-evolution-applier
 
 echo "Launching Overview..."
-docker-compose -f "$CONFIG"/overview.yml up -d
+$DOCKER_COMPOSE up -d
 
-echo "Launching plugins..."
-docker-compose -f "$CONFIG"/plugins.yml up -d
-
-GATEWAY_HOST=$(test $OVERVIEW_ADDRESS && echo $OVERVIEW_ADDRESS || docker-machine ip default 2>/dev/null || docker inspect -f '{{ .NetworkSettings.Gateway }}' overview-network)
+GATEWAY_HOST=$(test $OVERVIEW_ADDRESS && echo $OVERVIEW_ADDRESS || docker-machine ip default 2>/dev/null || docker network inspect "$NETWORK" -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}')
 
 link_plugins() {
   echo "Linking plugins to Overview at $GATEWAY_HOST..."
   docker run \
     --env "DOCKER_HOST=$GATEWAY_HOST" \
-    --link overview-database \
+    --net "$NETWORK" \
     --rm overview/plugin-setup
 }
 grep --silent '^SKIP_PLUGIN_SETUP=true$' config/overview.env || link_plugins
@@ -48,7 +45,7 @@ grep --silent '^SKIP_PLUGIN_SETUP=true$' config/overview.env || link_plugins
 echo "Waiting for everything to come online..."
 # Wait for the server to start
 docker run \
-  --link overview-web \
+  --net "$NETWORK" \
   --rm "$BUSYBOX_IMAGE" \
   sh -c 'until $(nc overview-web 9000 2>/dev/null); do sleep 1; done'
 
