@@ -6,7 +6,7 @@ OLD_VOLUME_CONTAINERS="overview-blob-storage overview-database-data overview-sea
 
 data_container_exists() {
   container=$1
-  [[ $(docker ps -f "name=^/$container"'$' -q) ]]
+  [[ $(docker ps -a -q -f "name=^/$container"'$') ]]
 }
 
 upgrade_named_volume() {
@@ -48,10 +48,15 @@ upgrade_named_volume() {
   # 2. mv files (with correct owners/permissions)
   # 3. cp all directories (to fix owners/permissions) -- very fast
   # 4. rm all directories
+  #
+  # To debug, try one of these:
+  # docker run -it --volumes-from overview-blob-storage --volume overviewlocal_overview-blob-storage:/mnt/overview-blob-storage --rm busybox sh
+  # docker run -it --volumes-from overview-database-data --volume overviewlocal_overview-database-data:/mnt/overview-database-data --rm busybox sh
+  # docker run -it --volumes-from overview-searchindex-data --volume overviewlocal_overview-searchindex-data:/mnt/overview-searchindex-data --rm busybox sh
 
   docker run \
     --volumes-from $volume \
-    --volume overviewlocal_$volume:$src \
+    --volume overviewlocal_$volume:$dest \
     --rm "$BUSYBOX_IMAGE" \
     sh -c "(cd $src && find . -type d -mindepth 1 -exec mkdir -p $dest/{} \; && find . -type f -exec mv {} $dest/{} \;) && cp -a $src/* $dest/ && rm -r $src/*"
 
