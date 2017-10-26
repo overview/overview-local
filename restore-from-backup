@@ -26,14 +26,22 @@ read -p "Are you sure? [yn] " REPLY
 echo "Ensuring Overview is not running..."
 "$DIRNAME"/stop
 
+echo "Wiping data..."
+docker volume remove overviewlocal_overview-database-data
+docker volume remove overviewlocal_overview-searchindex-data
+docker volume remove overviewlocal_overview-blob-storage
+docker volume create overviewlocal_overview-database-data
+docker volume create overviewlocal_overview-searchindex-data
+docker volume create overviewlocal_overview-blob-storage
+
 echo "Inserting backup data..."
 # We use ubuntu, not busybox, because its tar/gzip are far faster
 #
 # Plus, the "-p" flag is handy
 docker run \
-  --volumes-from overview-database-data:rw \
-  --volumes-from overview-searchindex-data:rw \
-  --volumes-from overview-blob-storage:rw \
+  --volume overviewlocal_overview-database-data:/var/lib/postgresql/data \
+  --volume overviewlocal_overview-searchindex-data:/var/lib/overview/searchindex \
+  --volume overviewlocal_overview-blob-storage:/var/lib/overview/blob-storage \
   --volume "$BACKUP_DIRNAME":/out \
   --rm "$UBUNTU_IMAGE" \
   sh -c "rm -rf /var/lib/postgresql/data/* /var/lib/overview/searchindex/* /var/lib/overview/blob-storage/* && tar -xzpf /out/$BACKUP_BASENAME -C /"

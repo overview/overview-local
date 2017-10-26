@@ -21,9 +21,9 @@ fail() {
 #
 # Plus, the "-p" flag is handy
 docker run \
-  --volumes-from overview-database-data:ro \
-  --volumes-from overview-searchindex-data:ro \
-  --volumes-from overview-blob-storage:ro \
+  --volume overviewlocal_overview-database-data:/var/lib/postgresql/data \
+  --volume overviewlocal_overview-searchindex-data:/var/lib/overview/searchindex \
+  --volume overviewlocal_overview-blob-storage:/var/lib/overview/blob-storage \
   --volume "$BACKUP_DIRNAME":/out \
   --rm "$UBUNTU_IMAGE" \
   tar -czpf /out/$BACKUP_BASENAME -C / var/lib/postgresql/data var/lib/overview/searchindex var/lib/overview/blob-storage
