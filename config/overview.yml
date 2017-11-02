@@ -32,7 +32,7 @@ services:
     image: redis:2.8
 
   # === plugins ===
-  overview-word-cloud:
+  overview-plugin-word-cloud:
     container_name: overview-plugin-word-cloud
     image: overview/overview-word-cloud
     environment:
@@ -40,7 +40,7 @@ services:
     ports:
       - '0.0.0.0:3000:3000'
 
-  overview-entity-filter:
+  overview-plugin-entity-filter:
     container_name: overview-plugin-entity-filter
     image: overview/overview-entity-filter
     environment:
@@ -48,7 +48,7 @@ services:
     ports:
       - '0.0.0.0:3001:3001'
 
-  overview-grep:
+  overview-plugin-grep:
     container_name: overview-plugin-grep
     image: overview/overview-grep
     environment:
@@ -56,7 +56,7 @@ services:
     ports:
       - '0.0.0.0:3002:3002'
 
-  overview-file-browser:
+  overview-plugin-file-browser:
     container_name: overview-plugin-file-browser
     image: overview/overview-plugin-file-browser
     environment:
@@ -64,7 +64,7 @@ services:
     ports:
       - '0.0.0.0:3003:3003'
 
-  overview-multi-search:
+  overview-plugin-multi-search:
     container_name: overview-plugin-multi-search
     image: overview/overview-plugin-multi-search
     environment:
