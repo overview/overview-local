@@ -58,7 +58,7 @@ services:
 
   overview-plugin-file-browser:
     container_name: overview-plugin-file-browser
-    image: overview/overview-plugin-file-browser
+    image: overview/overview-file-browser
     environment:
       - PORT=3003
     ports:
@@ -66,7 +66,7 @@ services:
 
   overview-plugin-multi-search:
     container_name: overview-plugin-multi-search
-    image: overview/overview-plugin-multi-search
+    image: overview/overview-multi-search
     environment:
       - PORT=3004
     ports:
