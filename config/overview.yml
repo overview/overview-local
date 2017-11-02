@@ -33,7 +33,7 @@ services:
 
   # === plugins ===
   overview-word-cloud:
-    container_name: overview-word-cloud
+    container_name: overview-plugin-word-cloud
     image: overview/overview-word-cloud
     environment:
       - PORT=3000
@@ -41,7 +41,7 @@ services:
       - '0.0.0.0:3000:3000'
 
   overview-entity-filter:
-    container_name: overview-entity-filter
+    container_name: overview-plugin-entity-filter
     image: overview/overview-entity-filter
     environment:
       - PORT=3001
@@ -49,7 +49,7 @@ services:
       - '0.0.0.0:3001:3001'
 
   overview-grep:
-    container_name: overview-grep
+    container_name: overview-plugin-grep
     image: overview/overview-grep
     environment:
       - PORT=3002
@@ -57,16 +57,16 @@ services:
       - '0.0.0.0:3002:3002'
 
   overview-file-browser:
-    container_name: overview-file-browser
-    image: overview/overview-file-browser
+    container_name: overview-plugin-file-browser
+    image: overview/overview-plugin-file-browser
     environment:
       - PORT=3003
     ports:
       - '0.0.0.0:3003:3003'
 
   overview-multi-search:
-    container_name: overview-multi-search
-    image: overview/overview-multi-search
+    container_name: overview-plugin-multi-search
+    image: overview/overview-plugin-multi-search
     environment:
       - PORT=3004
     ports:
@@ -79,4 +79,3 @@ volumes:
 
 networks:
   default:
-
