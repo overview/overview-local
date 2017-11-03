@@ -16,10 +16,8 @@ echo "Launching database..."
 $DOCKER_COMPOSE up -d overview-database
 # Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
 # stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
-docker run \
-  --net "$NETWORK" \
-  --rm "$BUSYBOX_IMAGE" \
-  sh -c 'until $(nc overview-database 5432 2>/dev/null); do sleep 1; done'
+docker exec -it overview-database \
+  sh -c 'until $(psql -U overview -c "SELECT 1" >/dev/null 2>&1); do echo "Waiting for Postgres ($?)"; sleep 1; done'
 
 echo "Applying latest schema..."
 docker run \
@@ -31,7 +29,7 @@ docker run \
 echo "Launching Overview..."
 $DOCKER_COMPOSE up -d
 
-GATEWAY_HOST=$(test $OVERVIEW_ADDRESS && echo $OVERVIEW_ADDRESS || docker-machine ip default 2>/dev/null || docker network inspect "$NETWORK" -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}')
+GATEWAY_HOST=$(test $OVERVIEW_ADDRESS && echo $OVERVIEW_ADDRESS || echo 'localhost')
 
 link_plugins() {
   echo "Linking plugins to Overview at $GATEWAY_HOST..."
