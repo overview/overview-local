@@ -7,7 +7,6 @@ abort() {
 }
 trap 'abort' INT TERM EXIT
 set -e
-set -x
 
 # Use versioned dependency images. We run busybox+ubuntu from the command
 # line, and their programs' calling conventions have been known to change.
