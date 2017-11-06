@@ -18,6 +18,7 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
    - [Stopping Overview](#stopping)
    - [Upgrading Overview](#upgrading)
    - [Enabling multi-user mode](#multi-user)
+   - [Enabling SSL and public access](#ssl)
    - [Backing up on Linux](#backuplinux)
    - [Backing up on Windows and Mac](#backupwinmac)
    - [Uninstalling](#uninstalling)
@@ -126,6 +127,63 @@ Overview-local runs by default in single user mode, meaning there is only one us
 The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page will by default print confirmation and password reset emails to the console, unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
 
 See also [configuration](#configuration) below.
+
+## <a name="multi-user">Enabling SSL and public access</a>
+
+Normally, overview-local only listens on the "localhost" network interface.
+That means other computers won't have access to your files (unless you have
+bizarre firewall rules or a virus).
+
+If you want to create a publicly-visible Overview service, add lines like
+these to `~/overview-local/config/overview.env`.
+
+    OV_MULTI_USER=true
+    OV_DOMAIN_NAME=overview.example.com
+
+Make `OV_DOMAIN_NAME` a DNS name you control.
+
+(You should also [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).)
+
+Now run `./start`.
+
+This tells Overview to listen for connections from _anywhere_ on ports 80
+and 443. In short, it makes your computer a web server.
+
+Now you need the rest of the world to see your web server. The instructions
+vary _greatly_ depending on your network. You may need to involve system
+administrators or your Internet service provider.
+
+Here's an example setup that would work on some home networks.
+
+Let's pretend you already control a DNS domain named `example.com` via an
+online hosting service and you are connecting to the Internet via an ISP
+that provides stable IP addresses, leaves ports 80 and 443 open, and supplied
+a router you can log into.
+
+1. Find your public IP address. (Search online for "What is my IP".)
+2. Register `A`, `AAAA`, `CNAME` records with your DNS hosting service, pointing
+   all of them to your IP address. (If your DNS hosting service allows `ALIAS`
+   records, those are a great way to only type in your IP address once.) You'll
+   need `overview.example.com`, `overview-plugin-word-cloud.example.com`,
+   `overview-plugin-entity-filter.example.com`,
+   `overview-plugin-multi-search.example.com`,
+   `overview-plugin-file-browser.example.com`, and
+   `overview-plugin-fields.example.com`.
+3. Make incoming traffic on ports 80 and 443 reach your computer. Log in to your
+   router and go to the "port forwarding" section. Add an entry for port 80 and
+   an entry for port 443, and point both at your computer. (You'll need your
+   network-internal IP address -- something like `192.168.1.2` -- and not your
+   public IP address.)
+4. Browse to `http://overview.example.com`. You should see your documents.
+
+Debug by running `./tail-logs` and reading the `overview-proxy` messages. It
+will prompt, one step at a time, to register DNS records and ensure traffic is
+routed correctly. Once `overview-proxy` says "SSL is enabled" for a URL, that
+means a web server on the Internet accessed Overview on port 80.
+
+Having routing problems? Sorry: in general, we can't help you solve them. One
+common mistake is that your computer can't access _itself_ at the DNS address
+you gave, but computers on the rest of the Internet can.
 
 ## <a name="upgrading">Upgrading Overview</a>
 

@@ -7,6 +7,7 @@ abort() {
 }
 trap 'abort' INT TERM EXIT
 set -e
+set -x
 
 # Use versioned dependency images. We run busybox+ubuntu from the command
 # line, and their programs' calling conventions have been known to change.
@@ -14,3 +15,4 @@ BUSYBOX_IMAGE="library/busybox:1.27.2"
 UBUNTU_IMAGE="library/ubuntu:17.10"
 
 DOCKER_COMPOSE="docker-compose -f $(dirname "$0")/config/overview.yml --project-name overview-local"
+grep -q -E '^OV_DOMAIN_NAME=.' "$(dirname "$0")/config/overview.env" && DOCKER_COMPOSE="$DOCKER_COMPOSE -f $(dirname "$0")/config/overview-ssl.yml" || true

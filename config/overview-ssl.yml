@@ -1,0 +1,8 @@
+# This will get overlaid on top of overview.yml iff the OV_DOMAIN_NAME
+# variable is set.
+version: '3'
+services:
+  overview-proxy:
+    ports:
+      - '0.0.0.0:80:80'
+      - '0.0.0.0:443:443'

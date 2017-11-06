@@ -12,5 +12,6 @@ docker pull overview/overview-entity-filter:latest
 docker pull overview/overview-grep:latest
 docker pull overview/overview-file-browser:latest
 docker pull overview/overview-multi-search:latest
+docker pull overview/overview-proxy:latest
 docker pull overview/db-evolution-applier:latest
 docker pull overview/plugin-setup:latest
