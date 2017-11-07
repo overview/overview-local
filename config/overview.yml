@@ -32,35 +32,25 @@ services:
     image: redis:2.8
 
   # === plugins ===
-  overview-plugin-word-cloud:
-    container_name: overview-plugin-word-cloud
-    image: overview/overview-word-cloud
-    environment:
-      - PORT=3000
-
   overview-plugin-entity-filter:
     container_name: overview-plugin-entity-filter
     image: overview/overview-entity-filter
-    environment:
-      - PORT=3001
-
-  overview-plugin-grep:
-    container_name: overview-plugin-grep
-    image: overview/overview-grep
-    environment:
-      - PORT=3002
 
   overview-plugin-file-browser:
     container_name: overview-plugin-file-browser
     image: overview/overview-file-browser
-    environment:
-      - PORT=3003
+
+  overview-plugin-metadata:
+    container_name: overview-plugin-metadata
+    image: overview/overview-plugin-metadata
 
   overview-plugin-multi-search:
     container_name: overview-plugin-multi-search
     image: overview/overview-multi-search
-    environment:
-      - PORT=3004
+
+  overview-plugin-word-cloud:
+    container_name: overview-plugin-word-cloud
+    image: overview/overview-word-cloud
 
   # === proxy -- which binds them all
   overview-proxy:

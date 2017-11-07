@@ -13,7 +13,7 @@ NETWORK="overviewlocal_default"
 migrate_volumes_if_needed
 
 echo "Launching database..."
-$DOCKER_COMPOSE up -d overview-database
+$DOCKER_COMPOSE up --remove-orphans -d overview-database
 # Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
 # stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
 docker exec -it overview-database \
@@ -27,7 +27,7 @@ docker run \
   --rm overview/db-evolution-applier
 
 echo "Launching Overview..."
-$DOCKER_COMPOSE up -d
+$DOCKER_COMPOSE up --remove-orphans -d
 
 . "$CONFIG"/overview.env
 echo "OV_URL: $OV_URL; OV_DOMAIN_NAME: $OV_DOMAIN_NAME"
