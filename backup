@@ -13,7 +13,10 @@ fail() {
 }
 
 [ -z "$1" ] && fail "Usage: $0 backup-filename.tar.gz"
-(echo "$BACKUP_BASENAME" | grep -q ' ') && fail "Your backup filename must not include spaces"
+
+# Write to the file before starting Docker: we need the file to exist for
+# Docker to mount it.
+: > "$1" || fail "Could not create file '$1'. Aborting."
 
 . "$(dirname "$0")"/common.sh
 
@@ -24,6 +27,6 @@ docker run \
   --volume overviewlocal_overview-database-data:/var/lib/postgresql/data \
   --volume overviewlocal_overview-searchindex-data:/var/lib/overview/searchindex \
   --volume overviewlocal_overview-blob-storage:/var/lib/overview/blob-storage \
-  --volume "$BACKUP_DIRNAME":/out \
+  --volume "$(realpath "$1")":/out.tar.gz \
   --rm "$UBUNTU_IMAGE" \
-  tar -czpf /out/$BACKUP_BASENAME -C / var/lib/postgresql/data var/lib/overview/searchindex var/lib/overview/blob-storage
+  tar -czpf /out.tar.gz -C / var/lib/postgresql/data var/lib/overview/searchindex var/lib/overview/blob-storage
