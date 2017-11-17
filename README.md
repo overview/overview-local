@@ -281,11 +281,6 @@ of `overview.defaults.env` into `overview.env`, then run `git reset --hard`.
 
 If that doesn't solve your problem, please add an issue to this project.
 
-## Overview hangs while processing a file or creating a tree
-
-There's a bug in Docker v1.9.1, only on Windows and Mac OS X. We've documented
-more at https://groups.google.com/d/msg/overview-dev/_dEE10njjCk/rVyl6GZkAAAJ.
-
 ## Microsoft Edge says "Hmm, we can't reach this page."
 
 We are aware of this issue: it affects lots of projects that use our technology.
