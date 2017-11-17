@@ -262,17 +262,6 @@ there.
 
 Configuration options are documented [here](https://github.com/overview/overview-server/wiki/Configuration)
 
-## Plugin views are empty or show broken links
-
-This can happen if you are running a server that is accessible by other machines. Overview gets confused about the externally reachable address of the plugin servers. To fix this, set the OVERVIEW_ADDRESS environment variable before starting the server, like this:
-
-    export OVERVIEW_ADDRESS=52.87.230.123
-    ./start
-
-Note that plugins communicate with the server on ports 3000-3100 (defined [here](https://github.com/overview/overview-local/blob/master/config/plugins.yml)) so adjust your firewall accordingly.
-
-Also, only plugin views created after this change will work. Add a new view or re-upload your documents to get working plugins.
-
 ## `Cannot pull with rebase: You have unstaged changes.`
 
 Did you try editing `overview.defaults.env` (or any other file)? That would
