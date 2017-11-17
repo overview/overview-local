@@ -19,8 +19,7 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
    - [Upgrading Overview](#upgrading)
    - [Enabling multi-user mode](#multi-user)
    - [Enabling SSL and public access](#ssl)
-   - [Backing up on Linux](#backuplinux)
-   - [Backing up on Windows and Mac](#backupwinmac)
+   - [Backing up](#backup)
    - [Uninstalling](#uninstalling)
 - [Troubleshooting](#troubleshooting)
 
@@ -197,30 +196,33 @@ The `update` command pulls down any changed docker images from Docker Hub. If yo
 
 Be aware that the `start` command also updates the overview-local code locally. 
 
-## <a name="backuplinux">Backing up Overview's data (on Linux)</a>
+## <a name="backuplinux"></a><a name="backupwinmac"></a><a name="backup">Backing up Overview's data</a>
 
 You can copy all Overview's data into a single file.
 
-Run `~/overview-local/backup backup.tar.gz` and then store `backup.tar.gz`
-somewhere safe.
+Run `~/overview-local/backup backup.tar.gz`. This will create a file called `backup.tar.gz`
+in the `overview-local` directory. (It will always be in that directory.) Store
+it somewhere safe.
 
-If you're in the midst of using Overview when you run this, the backup may be
-inconsistent. (We just use `tar` to back up a PostgreSQL directory.) To be safe,
-you should stop Overview before you back it up.
+Watch out! The backup may be corrupt if you run this command _while Overview is
+running_. We cannot recover from a corrupt backup. Play it safe: stop Overview
+before you back up.
 
-The first time you run the backup, you'll get a lot of messages about pulling
+The first time you run the backup, you'll see a lot of messages about pulling
 Docker images. That'll just happen the one time; every other invocation will be
 silent.
 
-## <a name="restorelinux">Restoring Overview from a backup (on Linux)</a>
+## <a name="restorelinux"></a><a name="restorewinmac"></a><a name="restore">Restoring Overview from a backup</a>
 
 After you've installed Overview and tested that it works, you can wipe all its
 data and replace it with a backup's data.
 
-Run `~/overview-local/restore-from-backup backup.tar.gz`, where `backup.tar.gz`
-is your backup file.
+Place your backup file (let's call it `backup.tar.gz`) in the `~/overview-local`
+directory. (It _must_ be in that directory.)
 
-This command will stop Overview itself.
+Now run: `~/overview-local/restore-from-backup backup.tar.gz`.
+
+This command will stop Overview and wipe all its data.
 
 Overview backups are forward-compatible with newer versions of Overview for one
 year. In other words: if you keep Overview up to date (by running `update`), you
@@ -228,37 +230,6 @@ will be able to restore from any backup that is less than one year old. (Don't
 take that to mean a two-year-old backup is worthless. You can restore and
 re-backup your data with interim versions of Overview to bring it up to date. We
 haven't written instructions for this task.)
-
-## <a name="backupwinmac">Backing up and restoring Overview on Windows and Mac OS X</a>
-
-On Windows and Mac OS X, Overview is running within a "virtual machine". You can
-create "snapshots" of the machine's state and restore those snapshots to bring
-Overview back to the way it was at any moment in time.
-
-We recommend you take backups while Overview is running.
-
-To back up, take a snapshot of the virtual machine:
-
-1. Open the "Oracle VM VirtualBox" program that came with Docker.
-2. Click the "default" machine on the left. (If the machine is not there, or if
-   it isn't "Running", start Overview and then come back here.)
-3. Click the "snapshots" button at the right of the toolbar.
-4. Click the "Take a snapshot" button.
-5. Enter a name, and click "OK".
-6. Close Oracle VM VirtualBox whenever you wish.
-
-To restore, spin up the virtual machine from its snapshot:
-
-1. Open the "Oracle VM VirtualBox" program that came with Docker.
-2. Click the "default" machine.
-3. If the machine isn't "Powered Off", power it off: in the toolbar, click
-   "Machine" -> "Close" -> "Power Off".
-4. Click the "snapshots" button at the right of the toolbar.
-5. Click the snapshot you saved earlier.
-6. Click the "Restore selected snapshot" button. You'll be prompted to
-   create *another* snapshot, which you may opt for; either way, click "Restore".
-7. Close Oracle VM VirtualBox whenever you wish.
-8. In your console, run `docker-machine start default`
 
 # <a name="uninstalling">Uninstalling</a>
 
