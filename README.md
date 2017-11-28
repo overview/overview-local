@@ -25,8 +25,6 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
 
 # <a name="installation">Installation</a>
 
-**Note: On Windows and Mac docker 1.9.1 will not work due to an ongoing [docker bug](https://github.com/docker/docker/issues/18180). Type `docker -v` to see which version you have. The latest version 1.10.1 may fix the problem, if not try 1.9.0. Linux install should work fine on any version.**
-
 ## <a name="linux">Installation: Linux</a>
 
 We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
@@ -45,7 +43,7 @@ If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's probably [http://172.17.42.1:9000/](http://172.17.42.1:9000/).)
+(It's probably [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="mac">Installation: Mac OS X</a>
 
