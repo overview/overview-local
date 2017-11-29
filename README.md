@@ -32,7 +32,7 @@ as well.
 
 0. Open the "Terminal" program.
 1. Install dependencies. On Ubuntu: `sudo apt-get install git docker.io`
-2. Install `docker-compose`. You'll need version 1.4 or higher. On Ubuntu: `sudo pip install docker-compose`
+2. Install `docker-compose`. You'll need version 1.17 or higher. On Ubuntu: `sudo pip install docker-compose`
 3. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then *log out* (of your entire desktop environment) and *log back in*. You can check the docker groups with the `groups` command to see that it is working.
 4. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
