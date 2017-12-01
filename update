@@ -4,9 +4,11 @@
 
 docker pull "$BUSYBOX_IMAGE"
 docker pull "$UBUNTU_IMAGE"
-docker pull overview/database:latest
-docker pull overview/worker:latest
-docker pull overview/web:latest
+docker pull overview/overview-db-evolution-applier:latest
+docker pull overview/overview-database:latest
+docker pull overview/overview-redis:latest
+docker pull overview/overview-web:latest
+docker pull overview/overview-worker:latest
 docker pull overview/overview-word-cloud:latest
 docker pull overview/overview-entity-filter:latest
 docker pull overview/overview-grep:latest
@@ -14,5 +16,4 @@ docker pull overview/overview-file-browser:latest
 docker pull overview/overview-multi-search:latest
 docker pull overview/overview-plugin-metadata:latest
 docker pull overview/overview-proxy:latest
-docker pull overview/db-evolution-applier:latest
 docker pull overview/plugin-setup:latest

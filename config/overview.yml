@@ -2,8 +2,7 @@ version: '3'
 services:
   # === core services ===
   overview-worker:
-    container_name: overview-worker
-    image: overview/worker
+    image: overview/overview-worker
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
       - overview-searchindex-data:/var/lib/overview/searchindex
@@ -12,49 +11,44 @@ services:
       - overview.env
 
   overview-web:
-    container_name: overview-web
-    image: overview/web
+    image: overview/overview-web
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
     env_file:
       - overview.defaults.env
       - overview.env
+    networks:
+      default:
+        aliases:
+          - web # TODO make overview-proxy look for overview-web, not web
 
   # === internal dependencies ===
   overview-database:
-    container_name: overview-database
-    image: overview/database
+    image: overview/overview-database
     volumes:
       - overview-database-data:/var/lib/postgresql/data
 
   overview-redis:
-    container_name: overview-redis
-    image: redis:2.8
+    image: overview/overview-redis
 
   # === plugins ===
   overview-plugin-entity-filter:
-    container_name: overview-plugin-entity-filter
     image: overview/overview-entity-filter
 
   overview-plugin-file-browser:
-    container_name: overview-plugin-file-browser
     image: overview/overview-file-browser
 
   overview-plugin-metadata:
-    container_name: overview-plugin-metadata
     image: overview/overview-plugin-metadata
 
   overview-plugin-multi-search:
-    container_name: overview-plugin-multi-search
     image: overview/overview-multi-search
 
   overview-plugin-word-cloud:
-    container_name: overview-plugin-word-cloud
     image: overview/overview-word-cloud
 
   # === proxy -- which binds them all
   overview-proxy:
-    container_name: overview-proxy
     image: overview/overview-proxy
     volumes:
       - overview-acme:/var/lib/acme

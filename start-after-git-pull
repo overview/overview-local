@@ -14,17 +14,13 @@ migrate_volumes_if_needed
 
 echo "Launching database..."
 $DOCKER_COMPOSE up --remove-orphans -d overview-database
-# Gotta use "sh", not "/bin/sh", or Windows 10 gives error:
-# stat: C:/Program Files/Git/usr/bin/sh: no such file or directory
-docker exec -it overview-database \
-  sh -c 'until $(psql -U overview -c "SELECT 1" >/dev/null 2>&1); do echo "Waiting for Postgres ($?)"; sleep 1; done'
 
 echo "Applying latest schema..."
 docker run \
   --net "$NETWORK" \
   --env-file "$CONFIG"/overview.defaults.env \
   --env-file "$CONFIG"/overview.env \
-  --rm overview/db-evolution-applier
+  --rm overview/overview-db-evolution-applier
 
 echo "Launching Overview..."
 $DOCKER_COMPOSE up --remove-orphans -d
