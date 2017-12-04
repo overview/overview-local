@@ -45,7 +45,7 @@ echo "Waiting for everything to come online..."
 docker run \
   --net "$NETWORK" \
   --rm "$BUSYBOX_IMAGE" \
-  sh -c 'until $(nc overview-web 9000 2>/dev/null); do sleep 1; done'
+  sh -c 'until wget http://overview-proxy:9000 2>/dev/null; do sleep 1; done'
 
 echo
 echo "Overview is running: browse to $OV_URL to use it"
