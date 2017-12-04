@@ -38,7 +38,7 @@ link_plugins() {
     --net "$NETWORK" \
     --rm overview/plugin-setup
 }
-[ "$SKIP_PLUGIN_SETUP" == "true" ] || link_plugins
+[ "$SKIP_PLUGIN_SETUP" = "true" ] || link_plugins
 
 echo "Waiting for everything to come online..."
 # Wait for the server to start
