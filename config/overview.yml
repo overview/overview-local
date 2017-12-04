@@ -17,10 +17,6 @@ services:
     env_file:
       - overview.defaults.env
       - overview.env
-    networks:
-      default:
-        aliases:
-          - web # TODO make overview-proxy look for overview-web, not web
 
   # === internal dependencies ===
   overview-database:
