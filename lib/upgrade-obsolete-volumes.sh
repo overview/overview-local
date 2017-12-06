@@ -6,7 +6,7 @@ OLD_VOLUME_CONTAINERS="overview-blob-storage overview-database-data overview-sea
 
 data_container_exists() {
   container=$1
-  [[ $(docker ps -a -q -f "name=^/$container"'$') ]]
+  docker ps -a -q -f "name=^/$container"'$'
 }
 
 upgrade_named_volume() {
