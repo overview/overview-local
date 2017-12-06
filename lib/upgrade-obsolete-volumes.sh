@@ -6,7 +6,7 @@ OLD_VOLUME_CONTAINERS="overview-blob-storage overview-database-data overview-sea
 
 data_container_exists() {
   container=$1
-  docker ps -a -q -f "name=^/$container"'$'
+  [ -n "$(docker ps -a -q -f "name=^/$container"'$')" ]
 }
 
 upgrade_named_volume() {
@@ -66,7 +66,9 @@ upgrade_named_volume() {
 
 need_migrate() {
   for container in $OLD_VOLUME_CONTAINERS; do
-    data_container_exists $container && return
+    if data_container_exists $container; then
+      return # true
+    fi
   done
 
   false
