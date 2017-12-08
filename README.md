@@ -165,7 +165,7 @@ a router you can log into.
    `overview-plugin-entity-filter.example.com`,
    `overview-plugin-multi-search.example.com`,
    `overview-plugin-file-browser.example.com`, and
-   `overview-plugin-fields.example.com`.
+   `overview-plugin-metadata.example.com`.
 3. Make incoming traffic on ports 80 and 443 reach your computer. Log in to your
    router and go to the "port forwarding" section. Add an entry for port 80 and
    an entry for port 443, and point both at your computer. (You'll need your
