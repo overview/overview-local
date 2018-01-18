@@ -2,7 +2,7 @@ version: '3'
 services:
   # === core services ===
   overview-worker:
-    image: overview/overview-worker
+    image: overview/overview-worker:0b720d8672ee371d853d48bdd5986957b4cada21
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
       - overview-searchindex-data:/var/lib/overview/searchindex
@@ -11,7 +11,7 @@ services:
       - overview.env
 
   overview-web:
-    image: overview/overview-web
+    image: overview/overview-web:0b720d8672ee371d853d48bdd5986957b4cada21
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
     env_file:
@@ -20,32 +20,39 @@ services:
 
   # === internal dependencies ===
   overview-database:
-    image: overview/overview-database
+    image: overview/overview-database:0b720d8672ee371d853d48bdd5986957b4cada21
     volumes:
       - overview-database-data:/var/lib/postgresql/data
 
+  overview-db-evolution-applier:
+    image: overview/overview-db-evolution-applier:0b720d8672ee371d853d48bdd5986957b4cada21
+    depends_on: [ 'overview-database' ]
+    env_file:
+      - overview.defaults.env
+      - overview.env
+
   overview-redis:
-    image: overview/overview-redis
+    image: overview/overview-redis:0b720d8672ee371d853d48bdd5986957b4cada21
 
   # === plugins ===
   overview-plugin-entity-filter:
-    image: overview/overview-entity-filter
+    image: overview/overview-entity-filter:1.0.3
 
   overview-plugin-file-browser:
-    image: overview/overview-file-browser
+    image: overview/overview-file-browser:1.0.3
 
   overview-plugin-metadata:
-    image: overview/overview-plugin-metadata
+    image: overview/overview-plugin-metadata:1.0.3
 
   overview-plugin-multi-search:
-    image: overview/overview-multi-search
+    image: overview/overview-multi-search:1.0.2
 
   overview-plugin-word-cloud:
-    image: overview/overview-word-cloud
+    image: overview/overview-word-cloud:1.0.1
 
   # === proxy -- which binds them all
   overview-proxy:
-    image: overview/overview-proxy
+    image: overview/overview-proxy:latest
     volumes:
       - overview-acme:/var/lib/acme
     env_file:

@@ -12,15 +12,8 @@ NETWORK="overviewlocal_default"
 . "$DIRNAME"/lib/upgrade-obsolete-volumes.sh
 migrate_volumes_if_needed
 
-echo "Launching database..."
-$DOCKER_COMPOSE up --remove-orphans -d overview-database
-
 echo "Applying latest schema..."
-docker run \
-  --net "$NETWORK" \
-  --env-file "$CONFIG"/overview.defaults.env \
-  --env-file "$CONFIG"/overview.env \
-  --rm overview/overview-db-evolution-applier
+$DOCKER_COMPOSE run --rm overview-db-evolution-applier
 
 echo "Launching Overview..."
 $DOCKER_COMPOSE up --remove-orphans -d
