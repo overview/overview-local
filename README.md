@@ -43,7 +43,7 @@ If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's probably [http://localhost:9000/](http://localhost:9000/).)
+(It's [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="mac">Installation: Mac OS X</a>
 
@@ -55,7 +55,7 @@ coffee; in half an hour or so, return to see Overview's URL on the screen.
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
+(It's [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="windows">Installation: Windows</a>
 
@@ -66,7 +66,7 @@ coffee; in half an hour or so, return to see Overview's URL on the screen.
 
 If all goes well, you'll see screen after screen of progress bars. Grab a
 coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's probably [http://192.168.99.100:9000/](http://192.168.99.100:9000/).)
+(It's [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="resources">Giving Overview enough resources (on OS X and Windows)</a>
 
