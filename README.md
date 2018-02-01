@@ -30,43 +30,41 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
 We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
 as well.
 
-0. Open the "Terminal" program.
+1. Open the "Terminal" program.
 1. Install dependencies. On Ubuntu: `sudo apt-get install git docker.io`
-2. Install `docker-compose`. You'll need version 1.17 or higher. On Ubuntu: `sudo pip install docker-compose`
-3. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then *log out* (of your entire desktop environment) and *log back in*. You can check the docker groups with the `groups` command to see that it is working.
-4. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
+1. Install `docker-compose`. You'll need version 1.17 or higher. On Ubuntu: `sudo pip install docker-compose`
+1. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then *log out* (of your entire desktop environment) and log back in. Reopen your terminal and type `groups`; make sure you're in the `docker` group.
+1. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
 You may need to install a few things to get `pip`; `sudo apt-get install python-setuptools python-dev build-essential`
 `sudo easy_install pip`. 
 
 If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` you probably need to log out and back in again, so that the newly updated environment variables can take effect.
 
-If all goes well, you'll see screen after screen of progress bars. Grab a
-coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's [http://localhost:9000/](http://localhost:9000/).)
+If all goes well, you'll see progress bars. Grab a coffee; in a few minutes, return
+to see Overview's URL on the screen. (It's [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="mac">Installation: Mac OS X</a>
 
-1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
-2. Install `git`, from [https://git-scm.com/downloads](https://git-scm.com/downloads).
-3. Open the _Docker Quick Start Terminal_. Not the regular OS X Terminal app, or you'll get an error and need to [start Docker manually](https://github.com/overview/overview-local#starting-overview) (We'll call this "the terminal" from now on.)
-4. Give Overview more resources (see below)
-6. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
+1. Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/).
+1. Give Docker more resources (see below).
+1. Install `git`, from [https://git-scm.com/downloads](https://git-scm.com/downloads).
+1. Open Mac OS's _Terminal_.
+1. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
-If all goes well, you'll see screen after screen of progress bars. Grab a
-coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's [http://localhost:9000/](http://localhost:9000/).)
+If all goes well, you'll see progress bars. Grab a coffee; in a few minutes, return
+to see Overview's URL on the screen. (It's [http://localhost:9000/](http://localhost:9000/).)
 
-## <a name="windows">Installation: Windows</a>
+## <a name="windows">Installation: Windows 10</a>
 
-1. Install Docker, from [https://www.docker.com/docker-toolbox](https://www.docker.com/docker-toolbox).
-2. Open the _Docker Quick Start Terminal_. (We'll call this "the terminal" from now on.)
-3. Give Overview more resources (see below)
+1. Install [Docker for Windows](https://docs.docker.com/docker-for-windows/install/).
+1. Give Docker more resources (see below).
+1. Install [Git for Windows](http://gitforwindows.org/).
+1. Open _Git Bash_. (We'll call this "the terminal" from now on.)
 4. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
 
-If all goes well, you'll see screen after screen of progress bars. Grab a
-coffee; in half an hour or so, return to see Overview's URL on the screen.
-(It's [http://localhost:9000/](http://localhost:9000/).)
+If all goes well, you'll see progress bars. Grab a coffee; in a few minutes, return
+to see Overview's URL on the screen. (It's [http://localhost:9000/](http://localhost:9000/).)
 
 ## <a name="resources">Giving Overview enough resources (on OS X and Windows)</a>
 
@@ -76,22 +74,15 @@ On OS X and Windows, Overview runs in Docker's "virtual machine". The virtual
 machine restricts the amount of memory and number of processors Overview can
 use.
 
-We recommend you give Overview at least 3GB of memory; the more, the faster it
-will be.
+We recommend you give Overview at least 3GB of memory.
 
 Here's how to give the Docker virtual machine more memory:
 
-1. Start the _Docker Quick Start Terminal_ application.
-1. Stop the virtual machine: `docker-machine stop default`
-1. Set virtual machine memory to 3Gb.
-  - OS X: `VBoxManage modifyvm default --memory 4096`
-  - Windows: `/c/Program\ Files/Oracle/VirtualBox/VBoxManage modifyvm default --memory 4096`
-1. Restart the virtual machine: `docker-machine start default`
-
-You don't _need_ to use the command line. When you installed Docker, it gave
-you a "VirtualBox" icon. Open that program to change more settings. For
-instance, if you assign Overview two processors, file imports will finish much
-sooner.
+1. Stop overview-local.
+1. Open Docker's "Settings".
+1. Go to "Advanced".
+1. Set memory to 3Gb.
+1. Click "Apply".
 
 # <a name="administration">Administration</a>
 
