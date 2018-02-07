@@ -2,7 +2,7 @@ version: '3'
 services:
   # === core services ===
   overview-worker:
-    image: overview/overview-worker:0b720d8672ee371d853d48bdd5986957b4cada21
+    image: overview/overview-worker:1a76c8327ca58bdc3d490c05e7f3aac684d549d8
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
       - overview-searchindex-data:/var/lib/overview/searchindex
@@ -11,7 +11,7 @@ services:
       - overview.env
 
   overview-web:
-    image: overview/overview-web:0b720d8672ee371d853d48bdd5986957b4cada21
+    image: overview/overview-web:1a76c8327ca58bdc3d490c05e7f3aac684d549d8
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
     env_file:
@@ -20,19 +20,19 @@ services:
 
   # === internal dependencies ===
   overview-database:
-    image: overview/overview-database:0b720d8672ee371d853d48bdd5986957b4cada21
+    image: overview/overview-database:1a76c8327ca58bdc3d490c05e7f3aac684d549d8
     volumes:
       - overview-database-data:/var/lib/postgresql/data
 
   overview-db-evolution-applier:
-    image: overview/overview-db-evolution-applier:0b720d8672ee371d853d48bdd5986957b4cada21
+    image: overview/overview-db-evolution-applier:1a76c8327ca58bdc3d490c05e7f3aac684d549d8
     depends_on: [ 'overview-database' ]
     env_file:
       - overview.defaults.env
       - overview.env
 
   overview-redis:
-    image: overview/overview-redis:0b720d8672ee371d853d48bdd5986957b4cada21
+    image: overview/overview-redis:1a76c8327ca58bdc3d490c05e7f3aac684d549d8
 
   # === plugins ===
   overview-plugin-entity-filter:
