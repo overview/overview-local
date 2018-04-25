@@ -2,7 +2,8 @@ version: '3'
 services:
   # === core services ===
   overview-worker:
-    image: overview/overview-worker:a0dbcf61f0953450fde07f9f8a389b6aa631bef4
+    image: overview/overview-worker:${OVERVIEW_VERSION}
+    networks: [ 'default', 'worker' ]
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
       - overview-searchindex-data:/var/lib/overview/searchindex
@@ -11,7 +12,7 @@ services:
       - overview.env
 
   overview-web:
-    image: overview/overview-web:a0dbcf61f0953450fde07f9f8a389b6aa631bef4
+    image: overview/overview-web:${OVERVIEW_VERSION}
     volumes:
       - overview-blob-storage:/var/lib/overview/blob-storage
     env_file:
@@ -20,19 +21,83 @@ services:
 
   # === internal dependencies ===
   overview-database:
-    image: overview/overview-database:a0dbcf61f0953450fde07f9f8a389b6aa631bef4
+    image: overview/overview-database:${OVERVIEW_VERSION}
     volumes:
       - overview-database-data:/var/lib/postgresql/data
 
   overview-db-evolution-applier:
-    image: overview/overview-db-evolution-applier:a0dbcf61f0953450fde07f9f8a389b6aa631bef4
+    image: overview/overview-db-evolution-applier:${OVERVIEW_VERSION}
     depends_on: [ 'overview-database' ]
     env_file:
       - overview.defaults.env
       - overview.env
 
   overview-redis:
-    image: overview/overview-redis:a0dbcf61f0953450fde07f9f8a389b6aa631bef4
+    image: overview/overview-redis:${OVERVIEW_VERSION}
+
+  # === converters ===
+  overview-convert-archive:
+    image: "${CONVERT_ARCHIVE_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Archive'
+
+  overview-convert-email:
+    image: "${CONVERT_EMAIL_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Email'
+
+  overview-convert-html:
+    image: "${CONVERT_HTML_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Html'
+
+  overview-convert-image:
+    image: "${CONVERT_IMAGE_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Image'
+
+  overview-convert-office:
+    image: "${CONVERT_OFFICE_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Office'
+
+  overview-convert-pdf:
+    image: "${CONVERT_PDF_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Pdf'
+
+  overview-convert-pdfocr:
+    image: "${CONVERT_PDFOCR_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/PdfOcr'
+
+  overview-convert-pst:
+    image: "${CONVERT_PST_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Pst'
+
+  overview-convert-text:
+    image: "${CONVERT_TEXT_IMAGE}"
+    networks: [ 'worker' ]
+    depends_on: [ 'overview-worker' ]
+    environment:
+      POLL_URL: 'http://overview-worker:9032/Text'
 
   # === plugins ===
   overview-plugin-entity-filter:
@@ -70,3 +135,4 @@ volumes:
 
 networks:
   default:
+  worker:
