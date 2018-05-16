@@ -101,7 +101,7 @@ services:
 
   # === plugins ===
   overview-plugin-entity-filter:
-    image: overview/overview-entity-filter:1.0.6
+    image: overview/overview-entity-filter:1.0.3
 
   overview-plugin-file-browser:
     image: overview/overview-file-browser:1.0.3
@@ -110,7 +110,7 @@ services:
     image: overview/overview-plugin-metadata:1.0.3
 
   overview-plugin-multi-search:
-    image: overview/overview-multi-search:1.0.4
+    image: overview/overview-multi-search:1.0.2
 
   overview-plugin-word-cloud:
     image: overview/overview-word-cloud:1.0.1
