@@ -15,5 +15,5 @@ UBUNTU_IMAGE="library/ubuntu:17.10"
 
 eval "$(grep -v -E '^#|^OV_WELCOME_BANNER|^$' "$(dirname "$0")"/config/overview.defaults.env | sed 's/^/export /')"
 eval "$(grep -v -E '^#|^OV_WELCOME_BANNER|^$' "$(dirname "$0")"/config/overview.env | sed 's/^/export /')"
-DOCKER_COMPOSE="docker-compose -f $(dirname "$0")/config/overview.yml --project-name overview-local"
+DOCKER_COMPOSE="docker-compose -f $(dirname "$0")/config/overview.yml --project-name overviewlocal"
 grep -q -E '^OV_DOMAIN_NAME=.' "$(dirname "$0")/config/overview.env" && DOCKER_COMPOSE="$DOCKER_COMPOSE -f $(dirname "$0")/config/overview-ssl.yml" || true
