@@ -5,9 +5,9 @@ CONFIG="$(dirname "$0")"/config
 
 NETWORK="overviewlocal_default"
 
-. "$DIRNAME"/common.sh
-
 [ -f "$CONFIG"/overview.env ] || echo '# You may edit this file. Read overview.defaults.env for options.' > "$CONFIG"/overview.env
+
+. "$DIRNAME"/common.sh
 
 . "$DIRNAME"/lib/upgrade-obsolete-volumes.sh
 migrate_volumes_if_needed
@@ -18,7 +18,6 @@ $DOCKER_COMPOSE run --rm overview-db-evolution-applier
 echo "Launching Overview..."
 $DOCKER_COMPOSE up --remove-orphans -d
 
-. "$CONFIG"/overview.env
 echo "OV_URL: $OV_URL; OV_DOMAIN_NAME: $OV_DOMAIN_NAME"
 [ -z "$OV_URL" ] && [ -n "$OV_DOMAIN_NAME" ] && OV_URL="https://$OV_DOMAIN_NAME"
 [ -z "$OV_URL" ] && OV_URL="http://localhost:9000"
