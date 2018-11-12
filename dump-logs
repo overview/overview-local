@@ -2,4 +2,4 @@
 
 . "$(dirname "$0")"/common.sh
 
-exec $DOCKER_COMPOSE logs --timestamps --tail=all --no-color
+docker_compose logs --timestamps --tail=all --no-color

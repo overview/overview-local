@@ -2,4 +2,4 @@
 
 . "$(dirname "$0")"/common.sh
 
-exec $DOCKER_COMPOSE logs --follow --tail=5 --timestamps
+docker_compose logs --follow --tail=5 --timestamps

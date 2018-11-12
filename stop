@@ -4,5 +4,5 @@
 
 set +e
 
-$DOCKER_COMPOSE kill
-$DOCKER_COMPOSE rm -f
+docker_compose kill
+docker_compose rm -f

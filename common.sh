@@ -15,5 +15,19 @@ UBUNTU_IMAGE="library/ubuntu:17.10"
 
 eval "$(grep -v -E '^#|^OV_WELCOME_BANNER|^$' "$(dirname "$0")"/config/overview.defaults.env | sed 's/^/export /')"
 eval "$(grep -v -E '^#|^OV_WELCOME_BANNER|^$' "$(dirname "$0")"/config/overview.env | sed 's/^/export /')"
-DOCKER_COMPOSE="docker-compose -f $(dirname "$0")/config/overview.yml --project-name overviewlocal"
-grep -q -E '^OV_DOMAIN_NAME=.' "$(dirname "$0")/config/overview.env" && DOCKER_COMPOSE="$DOCKER_COMPOSE -f $(dirname "$0")/config/overview-ssl.yml" || true
+
+# docker_compose: like "docker-compose" but with the arguments we want
+docker_compose() {
+  maybe_ssl1=""
+  maybe_ssl2=""
+  if grep -q -E '^OV_DOMAIN_NAME=.' "$(dirname "$0")"/config/overview.env; then
+    maybe_ssl1="-f"
+    maybe_ssl2="$(dirname "$0")"/config/overview-ssl.yml
+  fi
+
+  docker-compose \
+    -f "$(dirname "$0")"/config/overview.yml \
+    --project-name overviewlocal \
+    $maybe_ssl1 $maybe_ssl2 \
+    "$@"
+}

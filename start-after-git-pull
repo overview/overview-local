@@ -13,10 +13,10 @@ NETWORK="overviewlocal_default"
 migrate_volumes_if_needed
 
 echo "Applying latest schema..."
-$DOCKER_COMPOSE run --rm overview-db-evolution-applier
+docker_compose run --rm overview-db-evolution-applier
 
 echo "Launching Overview..."
-$DOCKER_COMPOSE up --remove-orphans -d
+docker_compose up --remove-orphans -d
 
 echo "OV_URL: $OV_URL; OV_DOMAIN_NAME: $OV_DOMAIN_NAME"
 [ -z "$OV_URL" ] && [ -n "$OV_DOMAIN_NAME" ] && OV_URL="https://$OV_DOMAIN_NAME"

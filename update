@@ -5,4 +5,4 @@
 docker pull "$BUSYBOX_IMAGE"
 docker pull "$UBUNTU_IMAGE"
 docker pull overview/overview-proxy:latest # TODO use version number
-$DOCKER_COMPOSE pull --parallel
+docker_compose pull --parallel
