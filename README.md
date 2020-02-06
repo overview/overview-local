@@ -224,11 +224,12 @@ haven't written instructions for this task.)
 
 If you want Overview gone forever, open a terminal and run these commands:
 
-    ~/overview-local/stop                  # stop Overview
-    rm -rf ~/overview-local                # remove Overview-related commands
-    docker rm -v overview-blob-storage     # delete PDFs and uploaded files
-    docker rm -v overview-database-data    # delete database
-    docker rm -v overview-searchindex-data # delete search index
+    ~/overview-local/stop                                    # stop Overview
+    rm -rf ~/overview-local                                  # remove Overview-related commands
+    docker volume rm overviewlocal_overview-acme             # delete SSL certificates
+    docker volume rm overviewlocal_overview-blob-storage     # delete PDFs and uploaded files
+    docker volume rm overviewlocal_overview-database-data    # delete database
+    docker volume rm overviewlocal_overview-searchindex-data # delete search index
     docker rmi $(docker images -f dangling=true -q) # free disk space
 
 
