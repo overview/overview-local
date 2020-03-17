@@ -101,7 +101,7 @@ services:
 
   # === plugins ===
   overview-plugin-entity-filter:
-    image: overview/overview-entity-filter:1.0.6
+    image: overview/overview-entity-filter:1.0.7
 
   overview-plugin-file-browser:
     image: overview/overview-file-browser:1.0.3
