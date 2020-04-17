@@ -27,17 +27,27 @@ Please note that Overview is licensed under [AGPL 3.0](http://www.gnu.org/licens
 
 ## <a name="linux">Installation: Linux</a>
 
-We've tested in Ubuntu Linux 15.10 (Vivid); other distributions should work just
-as well.
+We've tested in Ubuntu Linux 18.04.4 LTS (Bionic Beaver); other distributions
+should work just as well.
 
 1. Open the "Terminal" program.
-1. Install dependencies. On Ubuntu: `sudo apt-get install git docker.io`
-1. Install `docker-compose`. You'll need version 1.17 or higher. On Ubuntu: `sudo pip install docker-compose`
+1. [Install Docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository):
+    sudo apt-get update
+    sudo apt-get install -y \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg-agent \
+      software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
+1. Install `docker-compose`:
+    sudo apt-get install docker-compose
 1. Make yourself a member of the `docker` group. Run `sudo usermod -a -G docker $USER` and then *log out* (of your entire desktop environment) and log back in. Reopen your terminal and type `groups`; make sure you're in the `docker` group.
-1. Copy/paste this command into the terminal and press Enter: `curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh`
-
-You may need to install a few things to get `pip`; `sudo apt-get install python-setuptools python-dev build-essential`
-`sudo easy_install pip`. 
+1. Copy/paste this command into the terminal and press Enter:
+    curl https://raw.githubusercontent.com/overview/overview-local/master/install-from-scratch.sh | sh
 
 If you get the error `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` you probably need to log out and back in again, so that the newly updated environment variables can take effect.
 
