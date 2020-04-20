@@ -145,7 +145,10 @@ If you want to create a publicly-visible Overview service, add lines like
 these to `~/overview-local/config/overview.env`.
 
     OV_MULTI_USER=true
+    OV_APPLICATION_SECRET=your-random-80char-secret
     OV_DOMAIN_NAME=overview.example.com
+
+Be sure to supply your own `OV_APPLICATION_SECRET`, as documented above.
 
 Make `OV_DOMAIN_NAME` a DNS name you control.
 
