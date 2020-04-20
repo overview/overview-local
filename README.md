@@ -124,9 +124,12 @@ Open a terminal and run `~/overview-local/stop` to shut it down.
 
 ## <a name="multi-user">Enabling multi-user mode</a>
 
-Overview-local runs by default in single user mode, meaning there is only one user and no logins. To enable logins and multiple users, add the following line to `~/overview-local/config/overview.env`
+Overview-local runs by default in single user mode, meaning there is only one user and no logins. To enable logins and multiple users, add the following lines to `~/overview-local/config/overview.env`
 
     OV_MULTI_USER=true
+    OV_APPLICATION_SECRET=some-imp0ssib1e-t0-guess-string-of-about-80-chars
+    
+Create your own random `OV_APPLICATION_SECRET`. If you don't, anybody will be able to log in as any user and access any user's documents. On Linux and Mac OS, this command will display a random 80-char string: `< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c80; echo`
 
 The default user and password is `admin@overviewdocs.com`. You should change the password immediately. You can create new user accounts through the Admin menu when logged in. The registration form on the front page will by default print confirmation and password reset emails to the console, unless you [configure an SMTP server](https://github.com/overview/overview-server/wiki/Configuration).
 
