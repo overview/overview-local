@@ -274,6 +274,15 @@ there.
 
 Configuration options are documented [here](https://github.com/overview/overview-server/wiki/Configuration)
 
+## Disk space problems
+
+If Docker or your programs log errors such as "No space left on device", it
+may be because Docker is storing old, unused versions of Overview. (Every
+`./stop` and `./start` has the potential to download a new version of
+Overview, leaving old images unused. To delete those images, you may run:
+`docker system prune -a`. If you run Overview on a dedicated machine, you
+may wish to schedule this command to run regularly.
+
 ## `Cannot pull with rebase: You have unstaged changes.`
 
 Did you try editing `overview.defaults.env` (or any other file)? That would
