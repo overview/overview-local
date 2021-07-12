@@ -1,5 +1,4 @@
-We recommend the [public Overview server](https://www.overviewdocs.com). But we
-also support users who want to run Overview on their own machines. You'll want to do this if you need greater security, larger document sets, or custom modifications.
+This project lets users run Overview Docs on their own machines.
 
 You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
