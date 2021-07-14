@@ -103,7 +103,11 @@ Here's how to give the Docker virtual machine more memory:
 
 ## <a name="starting">Starting Overview</a>
 
-When you want to start Overview, run `~/overview-local/start` in a terminal.That `curl | sh` command you used to install Overview stored some files on your computer to make future startups much quicker. 
+When you want to start Overview, run `~/overview-local/start` in a terminal.
+That `curl | sh` command you used to install Overview stored some files on
+your computer to make future startups much quicker. 
+
+Overview and its plugins bind to `localhost` on ports `9000` and `3000-3010`.
 
 On Windows and Mac, if you see this error
 
