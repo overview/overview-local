@@ -1,7 +1,7 @@
-This project lets users run Overview Docs on their own machines.
-
-**You're in the right place. The Overview Docs public server is decommissioned.**
+**You're in the right place. The Overview Docs public server was decommissioned Aug. 1, 2021.**
 Follow these instructions to access Overview Docs.
+
+This project lets users run Overview Docs on their own machines.
 
 You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
