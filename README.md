@@ -1,5 +1,5 @@
-**You're in the right place. The Overview Docs public server was decommissioned Aug. 1, 2021.**
-Follow these instructions to access Overview Docs.
+**You're in the right place. The Overview Docs public server was decommissioned
+Aug. 1, 2021.** Follow these instructions to use Overview Docs.
 
 This project lets users run Overview Docs on their own machines.
 
