@@ -1,5 +1,7 @@
 This project lets users run Overview Docs on their own machines.
 
+**The public server is decommissioned. Please run Overview Docs on your own machine instead.**
+
 You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
 errors? File an issue on GitHub.
