@@ -1,6 +1,6 @@
 This project lets users run Overview Docs on their own machines.
 
-**The public server is decommissioned. Please run Overview Docs on your own machine instead.**
+**The Overview Docs public server is decommissioned. Use this project to analyze your documents.**
 
 You'll need to use a command line to follow these instructions. Don't worry:
 we'll guide you carefully. Copy/paste each command, and all should be fine. Any
